@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "441972403058",
+    "project_id": "pshyco-trivia",
+    "storage_bucket": "pshyco-trivia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441972403058:android:3cf37fccbf33e0eb5dcbeb",
+        "android_client_info": {
+          "package_name": "com.example.my_project_trivia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441972403058-m6nq04iqujkpbsj0ueptpqbb0jkerbvl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC88egReiJ9tEHq-UPRW5IfPWSRxCM50-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441972403058-m6nq04iqujkpbsj0ueptpqbb0jkerbvl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
