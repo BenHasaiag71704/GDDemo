@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:my_project_trivia/screens/auth_screen.dart';
 import './screens/home_screen.dart';
-import './screens/auth_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.light,
             ),
           ),
-          home: HomeScreen(),
+          home: AuthScreen(),
         );
       },
     );
