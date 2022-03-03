@@ -5,7 +5,7 @@ class AuthForm extends StatefulWidget {
   final void Function(
     String email,
     String password,
-    String username,
+    // String username,
     bool isLogin,
     BuildContext ctx,
   ) submitFN;
@@ -18,7 +18,7 @@ class __AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
   bool _isLogin = true;
   String _userEmail = '';
-  String _userName = '';
+  // String _userName = '';
   String _userPassword = '';
 
   void _trySubmit() {
@@ -27,8 +27,8 @@ class __AuthFormState extends State<AuthForm> {
 
     if (isValid) {
       _formKey.currentState!.save();
-      widget.submitFN(_userEmail.trim(), _userPassword.trim(), _userName.trim(),
-          _isLogin, context);
+      widget.submitFN(
+          _userEmail.trim(), _userPassword.trim(), _isLogin, context);
     }
   }
 
@@ -64,25 +64,25 @@ class __AuthFormState extends State<AuthForm> {
                       _userEmail = value.toString();
                     },
                   ),
-                  if (!_isLogin)
-                    TextFormField(
-                      key: ValueKey('username'),
-                      validator: (value) {
-                        if (value == null) {
-                          return "Please enter a valid username.";
-                        }
-                        if (value.isEmpty || value.length < 4) {
-                          return "Please enter at least 4 characters.";
-                        }
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                        labelText: 'Username',
-                      ),
-                      onSaved: (value) {
-                        _userName = value.toString();
-                      },
-                    ),
+                  // if (!_isLogin)
+                  // TextFormField(
+                  //   key: ValueKey('username'),
+                  //   validator: (value) {
+                  //     if (value == null) {
+                  //       return "Please enter a valid username.";
+                  //     }
+                  //     if (value.isEmpty || value.length < 4) {
+                  //       return "Please enter at least 4 characters.";
+                  //     }
+                  //     return null;
+                  //   },
+                  //   decoration: const InputDecoration(
+                  //     labelText: 'Username',
+                  //   ),
+                  //   onSaved: (value) {
+                  //     _userName = value.toString();
+                  //   },
+                  // ),
                   TextFormField(
                     key: ValueKey('password'),
                     validator: (value) {

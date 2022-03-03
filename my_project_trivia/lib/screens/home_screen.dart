@@ -11,8 +11,7 @@ class HomeScreen extends StatelessWidget {
     var userDataCollect = Provider.of<AppUser>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-            child: Text("welcome" + " " + userDataCollect.username.toString())),
+        title: Center(child: Text("welcome")),
         actions: [
           new DropdownButtonHideUnderline(
             child: DropdownButton(

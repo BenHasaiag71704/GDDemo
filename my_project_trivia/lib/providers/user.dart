@@ -7,17 +7,18 @@ import 'package:flutter/material.dart';
 
 class AppUser with ChangeNotifier {
   String? uid;
-  String? username;
+  String? nickname;
   int totalPoint = 0;
   int mathpoint = 0;
   int hebrewpoint = 0;
   int englishpoint = 0;
+  int lostpoint = 0;
   final _auth = FirebaseAuth.instance;
 
   void sumbitAuthForm(
     String email,
     String password,
-    String username,
+    // String username,
     bool isLogin,
     BuildContext ctx,
   ) async {
@@ -36,24 +37,25 @@ class AppUser with ChangeNotifier {
             .doc(authResult.user!.uid)
             .get()
             .then((snapshot) => snapshot.data()!['username']);
-        userDataCollect.setUserName(newname);
+        // userDataCollect.setUserName(newname);
       } else {
         authResult = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
         userDataCollect.setUid(authResult.user!.uid);
-        userDataCollect.setUserName(username);
+        //userDataCollect.setUserName(username);
         FirebaseFirestore.instance
             .collection('users')
             .doc(authResult.user!.uid)
             .set({
-          'username': username,
+          'nickname': "",
           'email': email,
           'totalPoint': 0,
           'mathpoint': 0,
           'hebrewpoint': 0,
           'englishpoint': 0,
+          'lostpoint': 0,
         });
       }
     } on PlatformException catch (err) {
@@ -74,13 +76,45 @@ class AppUser with ChangeNotifier {
     }
   }
 
+  String? get getNickName {
+    return nickname;
+  }
+
+  int get getLostPoint {
+    return lostpoint;
+  }
+
+  int get getTotalPoint {
+    return totalPoint;
+  }
+
+  int get getHebrewPoint {
+    return hebrewpoint;
+  }
+
+  int get getMathPoint {
+    return mathpoint;
+  }
+
+  int get getEnglishPoint {
+    return englishpoint;
+  }
+
   void setUid(String userId) {
     uid = userId;
     notifyListeners();
   }
 
-  void setUserName(String name) {
-    username = name;
-    notifyListeners();
+  void setUserName(String username) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({'nickname': nickname});
+    this.nickname = username;
   }
+
+  // void setUserName(String name) {
+  //   username = name;
+  //   notifyListeners();
+  // }
 }
