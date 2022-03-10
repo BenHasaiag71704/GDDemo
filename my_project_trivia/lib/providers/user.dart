@@ -32,11 +32,18 @@ class AppUser with ChangeNotifier {
           password: password,
         );
         userDataCollect.setUid(authResult.user!.uid);
-        String newname = await FirebaseFirestore.instance
+        final result = await FirebaseFirestore.instance
             .collection('users')
             .doc(authResult.user!.uid)
             .get()
-            .then((snapshot) => snapshot.data()!['username']);
+            .then((snapshot) {
+          nickname = snapshot.data()!['nickname'];
+          totalPoint = snapshot.data()!['totalPoint'];
+          mathpoint = snapshot.data()!['mathpoint'];
+          hebrewpoint = snapshot.data()!['hebrewpoint'];
+          englishpoint = snapshot.data()!['englishpoint'];
+          lostpoint = snapshot.data()!['lostpoint'];
+        });
         // userDataCollect.setUserName(newname);
       } else {
         authResult = await _auth.createUserWithEmailAndPassword(
@@ -109,7 +116,7 @@ class AppUser with ChangeNotifier {
     FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
-        .update({'nickname': nickname});
+        .update({'nickname': username});
     this.nickname = username;
   }
 
