@@ -118,6 +118,7 @@ class AppUser with ChangeNotifier {
         .doc(uid)
         .update({'nickname': username});
     this.nickname = username;
+    notifyListeners();
   }
 
   // void setUserName(String name) {
