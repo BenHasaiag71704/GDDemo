@@ -65,19 +65,21 @@ class AppUser with ChangeNotifier {
           'lostpoint': 0,
         });
       }
-    } on PlatformException catch (err) {
+    } on FirebaseAuthException catch (err) {
       var message = 'An error occured , please check your credentials!';
 
       if (err.message != null) {
         message = err.message.toString();
       }
-
-      // ScaffoldMessenger.of(ctx).showSnackBar(
-      //   SnackBar(
-      //     content: Text(message),
-      //     backgroundColor: Theme.of(ctx).errorColor,
-      //   ),
-      // );
+      ScaffoldMessenger.of(ctx).showSnackBar(
+        SnackBar(
+          content: Text(
+            "המשתמש אינו קיים במערכת/שם משתמש וססמא אינם נכונים",
+            textAlign: TextAlign.center,
+          ),
+          backgroundColor: Colors.blue,
+        ),
+      );
     } catch (err) {
       print(err);
     }

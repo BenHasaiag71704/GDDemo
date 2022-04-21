@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_project_trivia/providers/questions.dart';
 import 'package:provider/provider.dart';
 import './providers/user.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_project_trivia/screens/auth_screen.dart';
 import './screens/home_screen.dart';
+import './screens/game_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => AppUser(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Questions(),
         )
       ],
       //child: FutureBuilder(
@@ -52,6 +57,9 @@ class MyApp extends StatelessWidget {
               }
               return AuthScreen();
             }),
+        routes: {
+          GameScreen.routeName: (context) => GameScreen(),
+        },
       ),
     );
   }

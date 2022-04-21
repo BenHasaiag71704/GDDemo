@@ -12,6 +12,11 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
       appBar: AppBar(
         title: Text("leaderboard"),
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [Text("hello")],
+        ),
+      ),
     );
   }
 }
