@@ -16,6 +16,7 @@ enum Prefs {
   MathAndHebrew,
   MatnAndEnglish,
   EnglishAndHebrew,
+  None,
 }
 
 class HomeScreen extends StatefulWidget {
@@ -26,6 +27,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = false;
   Prefs wantedGame = Prefs.All;
+  bool isHebrew = true;
+  bool isEnglish = true;
+  bool isMath = true;
 
   @override
   void didChangeDependencies() async {
@@ -44,6 +48,32 @@ class _HomeScreenState extends State<HomeScreen> {
   //   await Provider.of<Questions>(context).getQuestions();
   //   super.initState();
   // }
+
+  static Prefs updateEnum(isHebrew, isEnglish, isMath) {
+    if (isHebrew == true && isEnglish == true && isMath == true) {
+      return Prefs.All;
+    }
+    if (isHebrew == true && isEnglish == true && isMath == false) {
+      return Prefs.EnglishAndHebrew;
+    }
+    if (isHebrew == true && isEnglish == false && isMath == true) {
+      return Prefs.MathAndHebrew;
+    }
+    if (isHebrew == false && isEnglish == true && isMath == true) {
+      return Prefs.MatnAndEnglish;
+    }
+    if (isHebrew == false && isEnglish == false && isMath == true) {
+      return Prefs.OnlyMath;
+    }
+    if (isHebrew == false && isEnglish == true && isMath == false) {
+      return Prefs.OnlyEnglish;
+    }
+    if (isHebrew == true && isEnglish == false && isMath == false) {
+      return Prefs.OnlyHebrew;
+    } else {
+      return Prefs.None;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,13 +123,91 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text("ברוכים הבאים למסך הראשי"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //math
+              Column(
+                children: [
+                  Switch(
+                    value: isMath,
+                    onChanged: (value) {
+                      setState(() {
+                        isMath = value;
+                        print(isMath);
+                        wantedGame = updateEnum(isHebrew, isEnglish, isMath);
+                        print(wantedGame);
+                      });
+                    },
+                    activeTrackColor: Colors.lightGreenAccent,
+                    activeColor: Colors.green,
+                  ),
+                  Text("בחר מתמטיקה"),
+                ],
+              ),
+              // hebrew
+              SizedBox(width: 50),
+              Column(
+                children: [
+                  Switch(
+                    value: isHebrew,
+                    onChanged: (value) {
+                      setState(() {
+                        isHebrew = value;
+                        print(isHebrew);
+                        wantedGame = updateEnum(isHebrew, isEnglish, isMath);
+                        print(wantedGame);
+                      });
+                    },
+                    activeTrackColor: Colors.lightGreenAccent,
+                    activeColor: Colors.green,
+                  ),
+                  Text("בחר עברית"),
+                ],
+              ),
+              SizedBox(width: 50),
+              // english
+              Column(
+                children: [
+                  Switch(
+                    value: isEnglish,
+                    onChanged: (value) {
+                      setState(() {
+                        isEnglish = value;
+                        print(isEnglish);
+                        wantedGame = updateEnum(isHebrew, isEnglish, isMath);
+                        print(wantedGame);
+                      });
+                    },
+                    activeTrackColor: Colors.lightGreenAccent,
+                    activeColor: Colors.green,
+                  ),
+                  Text("בחר אנגלית"),
+                ],
+              ),
+            ],
+          ),
           // Text(questionList[0].Classification),
           // Text(questionList[1].Classification),
           Center(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(GameScreen.routeName, arguments: wantedGame);
+                if (wantedGame == Prefs.None) {
+                  print("hello");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        "אנא בחר לפחות מצב משחק אחד",
+                        textAlign: TextAlign.center,
+                      ),
+                      backgroundColor: Colors.blue,
+                    ),
+                  );
+                  print("hello");
+                } else {
+                  Navigator.of(context)
+                      .pushNamed(GameScreen.routeName, arguments: wantedGame);
+                }
               },
               style: ElevatedButton.styleFrom(
                 shape: new RoundedRectangleBorder(

@@ -8,6 +8,7 @@ enum Prefs {
   MathAndHebrew,
   MatnAndEnglish,
   EnglishAndHebrew,
+  None,
 }
 
 class GameScreen extends StatefulWidget {
@@ -18,6 +19,36 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  static bool checkmath(Prefs temp) {
+    if (temp == Prefs.All ||
+        temp == Prefs.MathAndHebrew ||
+        temp == Prefs.MatnAndEnglish ||
+        temp == Prefs.OnlyMath) {
+      return true;
+    }
+    return false;
+  }
+
+  static bool checkhebrew(Prefs temp) {
+    if (temp == Prefs.All ||
+        temp == Prefs.EnglishAndHebrew ||
+        temp == Prefs.MathAndHebrew ||
+        temp == Prefs.OnlyHebrew) {
+      return true;
+    }
+    return false;
+  }
+
+  static bool checkenglish(Prefs temp) {
+    if (temp == Prefs.All ||
+        temp == Prefs.EnglishAndHebrew ||
+        temp == Prefs.MatnAndEnglish ||
+        temp == Prefs.OnlyEnglish) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final temp = ModalRoute.of(context)!.settings.arguments.toString();
@@ -29,15 +60,9 @@ class _GameScreenState extends State<GameScreen> {
     bool wantEnglish;
     bool wantHberew;
 
-    if (pre == Prefs.All) {
-      wantMath = true;
-      wantEnglish = true;
-      wantHberew = true;
-    } else {
-      wantMath = false;
-      wantEnglish = false;
-      wantHberew = false;
-    }
+    wantMath = checkmath(pre);
+    wantEnglish = checkenglish(pre);
+    wantHberew = checkhebrew(pre);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +70,20 @@ class _GameScreenState extends State<GameScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [Text(wantHberew.toString())],
+          children: [
+            Text(
+              "math-" +
+                  wantMath.toString() +
+                  "" +
+                  "\n"
+                      "english-" +
+                  wantEnglish.toString() +
+                  "\n" +
+                  "" +
+                  "hebrew-" +
+                  wantHberew.toString(),
+            )
+          ],
         ),
       ),
     );
