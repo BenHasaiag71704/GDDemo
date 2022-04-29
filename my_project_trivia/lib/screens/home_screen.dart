@@ -119,144 +119,153 @@ class _HomeScreenState extends State<HomeScreen> {
           //         child: CircularProgressIndicator(),
           //       )
           // :
-          Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text("ברוכים הבאים למסך הראשי"),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //math
-              Column(
-                children: [
-                  Switch(
-                    value: isMath,
-                    onChanged: (value) {
-                      setState(() {
-                        isMath = value;
-                        print(isMath);
-                        wantedGame = updateEnum(isHebrew, isEnglish, isMath);
-                        print(wantedGame);
-                      });
-                    },
-                    activeTrackColor: Colors.lightGreenAccent,
-                    activeColor: Colors.green,
-                  ),
-                  Text("בחר מתמטיקה"),
-                ],
-              ),
-              // hebrew
-              SizedBox(width: 50),
-              Column(
-                children: [
-                  Switch(
-                    value: isHebrew,
-                    onChanged: (value) {
-                      setState(() {
-                        isHebrew = value;
-                        print(isHebrew);
-                        wantedGame = updateEnum(isHebrew, isEnglish, isMath);
-                        print(wantedGame);
-                      });
-                    },
-                    activeTrackColor: Colors.lightGreenAccent,
-                    activeColor: Colors.green,
-                  ),
-                  Text("בחר עברית"),
-                ],
-              ),
-              SizedBox(width: 50),
-              // english
-              Column(
-                children: [
-                  Switch(
-                    value: isEnglish,
-                    onChanged: (value) {
-                      setState(() {
-                        isEnglish = value;
-                        print(isEnglish);
-                        wantedGame = updateEnum(isHebrew, isEnglish, isMath);
-                        print(wantedGame);
-                      });
-                    },
-                    activeTrackColor: Colors.lightGreenAccent,
-                    activeColor: Colors.green,
-                  ),
-                  Text("בחר אנגלית"),
-                ],
-              ),
-            ],
+          Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Colors.pink, Colors.orange],
           ),
-          // Text(questionList[0].Classification),
-          // Text(questionList[1].Classification),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                if (wantedGame == Prefs.None) {
-                  print("hello");
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        "אנא בחר לפחות מצב משחק אחד",
-                        textAlign: TextAlign.center,
-                      ),
-                      backgroundColor: Colors.blue,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("ברוכים הבאים למסך הראשי"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //math
+                Column(
+                  children: [
+                    Switch(
+                      value: isMath,
+                      onChanged: (value) {
+                        setState(() {
+                          isMath = value;
+                          print(isMath);
+                          wantedGame = updateEnum(isHebrew, isEnglish, isMath);
+                          print(wantedGame);
+                        });
+                      },
+                      activeTrackColor: Colors.lightGreenAccent,
+                      activeColor: Colors.green,
                     ),
-                  );
-                  print("hello");
-                } else {
-                  Navigator.of(context)
-                      .pushNamed(GameScreen.routeName, arguments: wantedGame);
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(55.0),
+                    Text("בחר מתמטיקה"),
+                  ],
                 ),
-                primary: Colors.pink[500],
-              ),
-              child: Text("start play!"),
+                // hebrew
+                SizedBox(width: 50),
+                Column(
+                  children: [
+                    Switch(
+                      value: isHebrew,
+                      onChanged: (value) {
+                        setState(() {
+                          isHebrew = value;
+                          print(isHebrew);
+                          wantedGame = updateEnum(isHebrew, isEnglish, isMath);
+                          print(wantedGame);
+                        });
+                      },
+                      activeTrackColor: Colors.lightGreenAccent,
+                      activeColor: Colors.green,
+                    ),
+                    Text("בחר עברית"),
+                  ],
+                ),
+                SizedBox(width: 50),
+                // english
+                Column(
+                  children: [
+                    Switch(
+                      value: isEnglish,
+                      onChanged: (value) {
+                        setState(() {
+                          isEnglish = value;
+                          print(isEnglish);
+                          wantedGame = updateEnum(isHebrew, isEnglish, isMath);
+                          print(wantedGame);
+                        });
+                      },
+                      activeTrackColor: Colors.lightGreenAccent,
+                      activeColor: Colors.green,
+                    ),
+                    Text("בחר אנגלית"),
+                  ],
+                ),
+              ],
             ),
-          ),
+            // Text(questionList[0].Classification),
+            // Text(questionList[1].Classification),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  if (wantedGame == Prefs.None) {
+                    print("hello");
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          "אנא בחר לפחות מצב משחק אחד",
+                          textAlign: TextAlign.center,
+                        ),
+                        backgroundColor: Colors.blue,
+                      ),
+                    );
+                    print("hello");
+                  } else {
+                    Navigator.of(context)
+                        .pushNamed(GameScreen.routeName, arguments: wantedGame);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(55.0),
+                  ),
+                  primary: Colors.pink[500],
+                ),
+                child: Text("start play!"),
+              ),
+            ),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => UserInfoScreen(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => UserInfoScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(55.0),
                     ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(55.0),
+                    primary: Colors.pink[500],
                   ),
-                  primary: Colors.pink[500],
+                  child: Text("User Page"),
                 ),
-                child: Text("User Page"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => LeaderBoardScreen(),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => LeaderBoardScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(55.0),
                     ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(55.0),
+                    primary: Colors.pink[500],
                   ),
-                  primary: Colors.pink[500],
+                  child: Text("leaderboard"),
                 ),
-                child: Text("leaderboard"),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

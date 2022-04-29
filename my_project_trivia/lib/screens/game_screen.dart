@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_project_trivia/controllers/question_controller.dart';
+import '/models/body.dart';
+
+// import 'package:websafe_svg/websafe_svg.dart';
 
 enum Prefs {
   All,
@@ -51,6 +56,7 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    QuestionController _controller = Get.put(QuestionController());
     final temp = ModalRoute.of(context)!.settings.arguments.toString();
 
     Prefs pre = Prefs.values.firstWhere(
@@ -65,27 +71,30 @@ class _GameScreenState extends State<GameScreen> {
     wantHberew = checkhebrew(pre);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text("welcome to the game"),
+        actions: [],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              "math-" +
-                  wantMath.toString() +
-                  "" +
-                  "\n"
-                      "english-" +
-                  wantEnglish.toString() +
-                  "\n" +
-                  "" +
-                  "hebrew-" +
-                  wantHberew.toString(),
-            )
-          ],
-        ),
-      ),
+      body: Body(),
     );
   }
 }
+
+// body: SingleChildScrollView(
+//         child: Column(
+//           children: [
+//             Text(
+//               "math-" +
+//                   wantMath.toString() +
+//                   "" +
+//                   "\n"
+//                       "english-" +
+//                   wantEnglish.toString() +
+//                   "\n" +
+//                   "" +
+//                   "hebrew-" +
+//                   wantHberew.toString(),
+//             )
+//           ],
+//         ),
+//       ),
