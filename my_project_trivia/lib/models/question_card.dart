@@ -43,17 +43,18 @@ class QuestionCard extends StatelessWidget {
               text: question.options[index],
               press: () async {
                 if (didPress == false) {
+                  didPress = true;
                   bool? isEnd = await _controller.checkAns(question, index);
                   // _controller.checkAns(question, index);
-                  didPress = true;
                   if (isEnd == true) {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => ScoreScreen()));
+                    // _controller.endGame();
                   }
                 }
               },
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_project_trivia/controllers/question_controller.dart';
 import 'package:my_project_trivia/providers/questions.dart';
 import '../providers/user.dart';
 import 'package:provider/provider.dart';
@@ -79,6 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var userDataCollect = Provider.of<AppUser>(context);
     var questionList = Provider.of<Questions>(context).getTheList;
+
+    QuestionController _controller = Get.put(QuestionController());
+
     bool IsZero = questionList.isEmpty;
     return Scaffold(
       appBar: AppBar(
@@ -213,6 +218,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                     print("hello");
                   } else {
+                    _controller.endGame();
+                    _controller.onInit();
                     Navigator.of(context)
                         .pushNamed(GameScreen.routeName, arguments: wantedGame);
                   }

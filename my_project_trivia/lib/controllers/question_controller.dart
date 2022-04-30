@@ -2,6 +2,7 @@
 
 import 'dart:ffi';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,7 +48,7 @@ class QuestionController extends GetxController
   @override
   void onInit() {
     _animationController =
-        AnimationController(duration: Duration(seconds: 60), vsync: this);
+        AnimationController(duration: Duration(seconds: 10), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
       ..addListener(() {
         update();
@@ -78,13 +79,14 @@ class QuestionController extends GetxController
     update();
 
     return Future.delayed(
-      Duration(seconds: 2),
+      Duration(seconds: 1),
       () {
         String? temp = nextQuestion();
         if (temp == "Done") {
           return true;
-        } else
+        } else {
           return false;
+        }
       },
     );
   }
@@ -105,4 +107,17 @@ class QuestionController extends GetxController
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
   }
+
+  void endGame() {
+    //_questionNumber.value = 0;
+    _questionNumber = 1.obs;
+    _animationController.reset();
+    _selectedAns = 0;
+    _isAnswered = false;
+    _numOfCorrectAns = 0;
+  }
+
+  // void clearScore() {
+  //   _numOfCorrectAns = 0;
+  // }
 }
