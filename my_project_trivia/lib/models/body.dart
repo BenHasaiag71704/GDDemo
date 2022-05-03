@@ -13,7 +13,8 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _questionController = Get.put(QuestionController());
+    QuestionController _questionController =
+        Get.put(QuestionController(context));
     return Stack(
       children: [
         SafeArea(

@@ -58,7 +58,7 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
+    QuestionController _controller = Get.put(QuestionController(context));
     final temp = ModalRoute.of(context)!.settings.arguments.toString();
     var userDataCollect = Provider.of<AppUser>(context);
 

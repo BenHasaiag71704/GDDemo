@@ -7,15 +7,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:my_project_trivia/models/samples.dart';
+import 'package:my_project_trivia/providers/questions.dart';
 import 'package:my_project_trivia/screens/score/score_screen.dart';
+import 'package:provider/provider.dart';
 
 class QuestionController extends GetxController
     with SingleGetTickerProviderMixin {
+  //--
+  BuildContext ctx;
+  QuestionController(this.ctx);
+
+  //--
   late AnimationController _animationController;
   late Animation _animation;
   Animation get animation => this._animation;
   late PageController _pageController = PageController(initialPage: 0);
   PageController get pageController => this._pageController;
+
+//--
+//---------------
+  late var _questions = Provider.of<Questions>(ctx).getTheList;
+
+//---------------
+//--
 
   // List<Question> _questions = sample_data
   //     .map(
@@ -29,17 +43,10 @@ class QuestionController extends GetxController
   //     )
   //     .toList();
 
-  List<Question> _questions = sample_data
-      .map(
-        (question) => Question(
-          id: question['id'],
-          question: question['question'],
-          options: question['options'],
-          type: "",
-          answer: question['answer_index'],
-        ),
-      )
-      .toList();
+  // List<Question> theQuestionsInList;
+  // QuestionController(this.theQuestionsInList);
+
+  // List<Question> _questions = theQuestionsInList;
 
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
@@ -50,7 +57,7 @@ class QuestionController extends GetxController
   late int _selectedAns;
   int get selectedAns => this._selectedAns;
 
-  RxInt _questionNumber = 1.obs;
+  RxInt _questionNumber = 0.obs;
   RxInt get questionNumber => this._questionNumber;
 
   late int _numOfCorrectAns = 0;
@@ -133,4 +140,5 @@ class QuestionController extends GetxController
   // void clearScore() {
   //   _numOfCorrectAns = 0;
   // }
+
 }

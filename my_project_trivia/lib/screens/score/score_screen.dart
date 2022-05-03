@@ -14,7 +14,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
   Widget build(BuildContext context) {
     //var userDataCollect = Provider.of<AppUser>(context);
 
-    QuestionController _qnController = Get.put(QuestionController());
+    QuestionController _qnController = Get.put(QuestionController(context));
 
     int _temp = _qnController.numOfCorrectAns;
     // setState(() {

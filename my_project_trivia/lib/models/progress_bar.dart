@@ -19,7 +19,7 @@ class ProgressBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
       ),
       child: GetBuilder<QuestionController>(
-        init: QuestionController(),
+        init: QuestionController(context),
         builder: (controller) {
           return Stack(
             children: [

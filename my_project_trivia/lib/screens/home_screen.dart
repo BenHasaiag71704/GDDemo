@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_project_trivia/controllers/question_controller.dart';
+//--
+//import 'package:my_project_trivia/providers/questions.dart';
+//import '../models/question.dart';
+//--
 import 'package:my_project_trivia/providers/questions.dart';
+
 import '../providers/user.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import './user_info_screen.dart';
 import './leaderboard_screen.dart';
-import '../models/question.dart';
 import './game_screen.dart';
 
 enum Prefs {
@@ -82,9 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
     var userDataCollect = Provider.of<AppUser>(context);
     var questionList = Provider.of<Questions>(context).getTheList;
 
-    QuestionController _controller = Get.put(QuestionController());
+    QuestionController _controller = Get.put(QuestionController(context));
 
-    bool IsZero = questionList.isEmpty;
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -118,162 +121,168 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body:
-          //  _isLoading || IsZero
-          //     ? Center(
-          //         child: CircularProgressIndicator(),
-          //       )
-          // :
-          Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Colors.pink, Colors.orange],
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("ברוכים הבאים למסך הראשי"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //math
-                Column(
-                  children: [
-                    Switch(
-                      value: isMath,
-                      onChanged: (value) {
-                        setState(() {
-                          isMath = value;
-                          print(isMath);
-                          wantedGame = updateEnum(isHebrew, isEnglish, isMath);
-                          print(wantedGame);
-                        });
-                      },
-                      activeTrackColor: Colors.lightGreenAccent,
-                      activeColor: Colors.green,
-                    ),
-                    Text("בחר מתמטיקה"),
-                  ],
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [Colors.pink, Colors.orange],
                 ),
-                // hebrew
-                SizedBox(width: 50),
-                Column(
-                  children: [
-                    Switch(
-                      value: isHebrew,
-                      onChanged: (value) {
-                        setState(() {
-                          isHebrew = value;
-                          print(isHebrew);
-                          wantedGame = updateEnum(isHebrew, isEnglish, isMath);
-                          print(wantedGame);
-                        });
-                      },
-                      activeTrackColor: Colors.lightGreenAccent,
-                      activeColor: Colors.green,
-                    ),
-                    Text("בחר עברית"),
-                  ],
-                ),
-                SizedBox(width: 50),
-                // english
-                Column(
-                  children: [
-                    Switch(
-                      value: isEnglish,
-                      onChanged: (value) {
-                        setState(() {
-                          isEnglish = value;
-                          print(isEnglish);
-                          wantedGame = updateEnum(isHebrew, isEnglish, isMath);
-                          print(wantedGame);
-                        });
-                      },
-                      activeTrackColor: Colors.lightGreenAccent,
-                      activeColor: Colors.green,
-                    ),
-                    Text("בחר אנגלית"),
-                  ],
-                ),
-              ],
-            ),
-            // Text(questionList[0].Classification),
-            // Text(questionList[1].Classification),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  if (wantedGame == Prefs.None) {
-                    print("hello");
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          "אנא בחר לפחות מצב משחק אחד",
-                          textAlign: TextAlign.center,
-                        ),
-                        backgroundColor: Colors.blue,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("ברוכים הבאים למסך הראשי"),
+                  // Text(questionList[0].question),
+                  // Text(questionList[1].question),
+                  // Text(questionList[2].question),
+                  // Text(questionList[3].question),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //math
+                      Column(
+                        children: [
+                          Switch(
+                            value: isMath,
+                            onChanged: (value) {
+                              setState(() {
+                                isMath = value;
+                                print(isMath);
+                                wantedGame =
+                                    updateEnum(isHebrew, isEnglish, isMath);
+                                print(wantedGame);
+                              });
+                            },
+                            activeTrackColor: Colors.lightGreenAccent,
+                            activeColor: Colors.green,
+                          ),
+                          Text("בחר מתמטיקה"),
+                        ],
                       ),
-                    );
-                    print("hello");
-                  } else {
-                    _controller.endGame();
-                    _controller.onInit();
-                    Navigator.of(context)
-                        .pushNamed(GameScreen.routeName, arguments: wantedGame);
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(55.0),
+                      // hebrew
+                      SizedBox(width: 50),
+                      Column(
+                        children: [
+                          Switch(
+                            value: isHebrew,
+                            onChanged: (value) {
+                              setState(() {
+                                isHebrew = value;
+                                print(isHebrew);
+                                wantedGame =
+                                    updateEnum(isHebrew, isEnglish, isMath);
+                                print(wantedGame);
+                              });
+                            },
+                            activeTrackColor: Colors.lightGreenAccent,
+                            activeColor: Colors.green,
+                          ),
+                          Text("בחר עברית"),
+                        ],
+                      ),
+                      SizedBox(width: 50),
+                      // english
+                      Column(
+                        children: [
+                          Switch(
+                            value: isEnglish,
+                            onChanged: (value) {
+                              setState(() {
+                                isEnglish = value;
+                                print(isEnglish);
+                                wantedGame =
+                                    updateEnum(isHebrew, isEnglish, isMath);
+                                print(wantedGame);
+                              });
+                            },
+                            activeTrackColor: Colors.lightGreenAccent,
+                            activeColor: Colors.green,
+                          ),
+                          Text("בחר אנגלית"),
+                        ],
+                      ),
+                    ],
                   ),
-                  primary: Colors.pink[500],
-                ),
-                child: Text("start play!"),
+                  // Text(questionList[0].Classification),
+                  // Text(questionList[1].Classification),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (wantedGame == Prefs.None) {
+                          print("hello");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                "אנא בחר לפחות מצב משחק אחד",
+                                textAlign: TextAlign.center,
+                              ),
+                              backgroundColor: Colors.blue,
+                            ),
+                          );
+                          print("hello");
+                        } else {
+                          _controller.endGame();
+                          _controller.onInit();
+                          Navigator.of(context).pushNamed(GameScreen.routeName,
+                              arguments: wantedGame);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(55.0),
+                        ),
+                        primary: Colors.pink[500],
+                      ),
+                      child: Text("start play!"),
+                    ),
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (ctx) => UserInfoScreen(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(55.0),
+                          ),
+                          primary: Colors.pink[500],
+                        ),
+                        child: Text("User Page"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (ctx) => LeaderBoardScreen(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(55.0),
+                          ),
+                          primary: Colors.pink[500],
+                        ),
+                        child: Text("leaderboard"),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (ctx) => UserInfoScreen(),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(55.0),
-                    ),
-                    primary: Colors.pink[500],
-                  ),
-                  child: Text("User Page"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (ctx) => LeaderBoardScreen(),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(55.0),
-                    ),
-                    primary: Colors.pink[500],
-                  ),
-                  child: Text("leaderboard"),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

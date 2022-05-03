@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:my_project_trivia/models/question.dart';
+import 'package:my_project_trivia/models/samples.dart';
+
+//import 'package:my_project_trivia/models/question.dart';
+
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,22 +17,19 @@ class Questions with ChangeNotifier {
         (snapshot) {
           snapshot.docs.forEach((document) {
             _questionList.add(Question(
-                document.id,
-                document['Classification'],
-                document['type'],
-                document['thetext'],
-                document['answer1'],
-                document['answer2'],
-                document['answer3'],
-                document['answer4'],
-                document['correctanswer']));
+              id: document.id,
+              answer: document['answer'],
+              options: document['options'],
+              question: document['question'],
+              type: document['type'],
+            ));
           });
         },
       );
     } catch (e) {
       print(e);
     }
-    notifyListeners();
+    //notifyListeners();
   }
 
   Question? getItem(int position) {
@@ -40,7 +40,7 @@ class Questions with ChangeNotifier {
   }
 
   List<Question> get getTheList {
-    return _questionList;
+    return [..._questionList];
   }
 }
 
