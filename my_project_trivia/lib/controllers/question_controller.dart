@@ -23,6 +23,7 @@ class QuestionController extends GetxController
           id: question['id'],
           question: question['question'],
           options: question['options'],
+          type: "",
           answer: question['answer_index'],
         ),
       )

@@ -1,12 +1,13 @@
 class Question {
   final int id, answer;
-  final String question;
-  final List<String> options;
+  final String question, type;
+  final List<dynamic> options;
 
   Question(
       {required this.id,
       required this.question,
       required this.answer,
+      required this.type,
       required this.options});
 }
 
