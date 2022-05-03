@@ -123,6 +123,15 @@ class AppUser with ChangeNotifier {
     notifyListeners();
   }
 
+  void addScore(int score) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({'totalpoint': totalPoint});
+    this.totalPoint = getTotalPoint + score;
+    notifyListeners();
+  }
+
   // void setUserName(String name) {
   //   username = name;
   //   notifyListeners();

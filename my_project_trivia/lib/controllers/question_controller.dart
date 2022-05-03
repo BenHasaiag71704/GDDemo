@@ -17,6 +17,18 @@ class QuestionController extends GetxController
   late PageController _pageController = PageController(initialPage: 0);
   PageController get pageController => this._pageController;
 
+  // List<Question> _questions = sample_data
+  //     .map(
+  //       (question) => Question(
+  //         id: question['id'],
+  //         question: question['question'],
+  //         options: question['options'],
+  //         type: "",
+  //         answer: question['answer_index'],
+  //       ),
+  //     )
+  //     .toList();
+
   List<Question> _questions = sample_data
       .map(
         (question) => Question(

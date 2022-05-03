@@ -1,5 +1,5 @@
 class Question {
-  final int id, answer;
+  final int answer, id;
   final String question, type;
   final List<dynamic> options;
 

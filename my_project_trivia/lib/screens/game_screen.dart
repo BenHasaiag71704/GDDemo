@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_project_trivia/controllers/question_controller.dart';
+import 'package:my_project_trivia/providers/user.dart';
+import 'package:provider/provider.dart';
 import '/models/body.dart';
 
 // import 'package:websafe_svg/websafe_svg.dart';
@@ -58,6 +60,7 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
     final temp = ModalRoute.of(context)!.settings.arguments.toString();
+    var userDataCollect = Provider.of<AppUser>(context);
 
     Prefs pre = Prefs.values.firstWhere(
         (keyword) => keyword.toString().toUpperCase() == temp.toUpperCase());

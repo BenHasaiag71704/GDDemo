@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_project_trivia/controllers/question_controller.dart';
+//import 'package:my_project_trivia/providers/user.dart';
+//import 'package:provider/provider.dart';
 
 class ScoreScreen extends StatefulWidget {
   @override
@@ -10,8 +12,15 @@ class ScoreScreen extends StatefulWidget {
 class _ScoreScreenState extends State<ScoreScreen> {
   @override
   Widget build(BuildContext context) {
+    //var userDataCollect = Provider.of<AppUser>(context);
+
     QuestionController _qnController = Get.put(QuestionController());
+
     int _temp = _qnController.numOfCorrectAns;
+    // setState(() {
+    //   userDataCollect.addScore(_temp);
+    // });
+
     return Scaffold(
       appBar: AppBar(),
       body: Stack(
