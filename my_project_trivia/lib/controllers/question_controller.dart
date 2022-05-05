@@ -56,10 +56,13 @@ class QuestionController extends GetxController
 
   late int _selectedAns;
   int get selectedAns => this._selectedAns;
-
+//--
   RxInt _questionNumber = 0.obs;
   RxInt get questionNumber => this._questionNumber;
 
+  // RxInt _questionNumber = 0.obs;
+  // RxInt get questionNumber => this._questionNumber;
+//--
   late int _numOfCorrectAns = 0;
   int get numOfCorrectAns => this._numOfCorrectAns;
 
