@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:my_project_trivia/controllers/question_controller.dart';
 import 'package:my_project_trivia/providers/user.dart';
 import 'package:provider/provider.dart';
-import '/models/body.dart';
-
-// import 'package:websafe_svg/websafe_svg.dart';
+import '../widgets/body.dart';
 
 enum Prefs {
   All,
@@ -58,7 +54,6 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController(context));
     final temp = ModalRoute.of(context)!.settings.arguments.toString();
     var userDataCollect = Provider.of<AppUser>(context);
 
@@ -82,22 +77,3 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 }
-
-// body: SingleChildScrollView(
-//         child: Column(
-//           children: [
-//             Text(
-//               "math-" +
-//                   wantMath.toString() +
-//                   "" +
-//                   "\n"
-//                       "english-" +
-//                   wantEnglish.toString() +
-//                   "\n" +
-//                   "" +
-//                   "hebrew-" +
-//                   wantHberew.toString(),
-//             )
-//           ],
-//         ),
-//       ),

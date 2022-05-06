@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:my_project_trivia/controllers/question_controller.dart';
 //import 'package:my_project_trivia/providers/user.dart';
 //import 'package:provider/provider.dart';
 
@@ -14,9 +12,6 @@ class _ScoreScreenState extends State<ScoreScreen> {
   Widget build(BuildContext context) {
     //var userDataCollect = Provider.of<AppUser>(context);
 
-    QuestionController _qnController = Get.put(QuestionController(context));
-
-    int _temp = _qnController.numOfCorrectAns;
     // setState(() {
     //   userDataCollect.addScore(_temp);
     // });
@@ -35,7 +30,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
               ),
               Spacer(),
               Text(
-                "${_temp}/${_qnController.questions.length}",
+                "10",
                 style: TextStyle(fontSize: 30),
               ),
               Spacer(flex: 3),

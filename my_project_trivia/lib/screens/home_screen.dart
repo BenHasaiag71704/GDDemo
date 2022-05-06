@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:my_project_trivia/controllers/question_controller.dart';
 //--
 //import 'package:my_project_trivia/providers/questions.dart';
 //import '../models/question.dart';
@@ -42,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _isLoading = true;
     });
-    await Provider.of<Questions>(context, listen: false).getQuestions();
+    await Provider.of<Questions>(context, listen: false).fetchQuestions();
     super.didChangeDependencies();
     setState(() {
       _isLoading = false;
@@ -85,8 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var userDataCollect = Provider.of<AppUser>(context);
     var questionList = Provider.of<Questions>(context).getTheList;
-
-    QuestionController _controller = Get.put(QuestionController(context));
 
     return Scaffold(
       appBar: AppBar(
@@ -227,8 +223,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                           print("hello");
                         } else {
-                          _controller.endGame();
-                          _controller.onInit();
                           Navigator.of(context).pushNamed(GameScreen.routeName,
                               arguments: wantedGame);
                         }
