@@ -40,6 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _isLoading = true;
     });
+    // await Provider.of<AppUser>(context).getUid();
+
     await Provider.of<Questions>(context, listen: false).fetchQuestions();
     super.didChangeDependencies();
     setState(() {
@@ -85,10 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
     var questionList = Provider.of<Questions>(context).getTheList;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Center(
-          child: Text("welcome"),
-        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         actions: [
           new DropdownButtonHideUnderline(
             child: DropdownButton(
@@ -126,13 +128,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [Colors.pink, Colors.orange],
+                  colors: [Colors.blue.shade400, Colors.green.shade200],
                 ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("ברוכים הבאים למסך הראשי"),
+                  SizedBox(
+                    height: 1,
+                  ),
+                  Text(
+                    "ברוכים הבאים למסך הראשי",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
                   // Text(questionList[0].question),
                   // Text(questionList[1].question),
                   // Text(questionList[2].question),
@@ -228,12 +239,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
+                        fixedSize: Size(200, 100),
                         shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(55.0),
+                          borderRadius: new BorderRadius.circular(20.0),
                         ),
-                        primary: Colors.pink[500],
+                        primary: Colors.lightGreenAccent.shade100,
                       ),
-                      child: Text("start play!"),
+                      child: Text(
+                        "start play!",
+                        style: TextStyle(fontSize: 35),
+                      ),
                     ),
                   ),
 
@@ -250,9 +265,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(55.0),
+                            borderRadius: new BorderRadius.circular(20.0),
                           ),
-                          primary: Colors.pink[500],
+                          primary: Colors.lightGreenAccent.shade100,
                         ),
                         child: Text("User Page"),
                       ),
@@ -266,9 +281,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(55.0),
+                            borderRadius: new BorderRadius.circular(20.0),
                           ),
-                          primary: Colors.pink[500],
+                          primary: Colors.lightGreenAccent.shade100,
                         ),
                         child: Text("leaderboard"),
                       ),

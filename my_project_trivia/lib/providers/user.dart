@@ -85,6 +85,21 @@ class AppUser with ChangeNotifier {
     }
   }
 
+//---
+  // Future<void> getUid() async {
+  //   if (uid == '') {
+  //     try {
+  //       uid = await FirebaseAuth.instance.currentUser!.uid;
+  //       notifyListeners();
+  //     } on FirebaseAuthException catch (error) {
+  //       if (kDebugMode) {
+  //         print(error.message);
+  //       }
+  //     }
+  //   }
+  // }
+//---
+
   String? get getNickName {
     return nickname;
   }

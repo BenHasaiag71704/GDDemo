@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_project_trivia/providers/questions.dart';
 import 'package:my_project_trivia/providers/user.dart';
 import 'package:provider/provider.dart';
 import '../widgets/body.dart';
@@ -71,6 +72,8 @@ class _GameScreenState extends State<GameScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         actions: [],
       ),
       body: Body(),

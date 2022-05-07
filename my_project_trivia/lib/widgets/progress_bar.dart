@@ -22,7 +22,7 @@ class _ProgressBarState extends State<ProgressBar> {
       width: double.infinity,
       height: 35,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.white, width: 3),
+        border: Border.all(color: Colors.black, width: 3),
         borderRadius: BorderRadius.circular(50),
       ),
       child: Stack(

@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_project_trivia/screens/auth_screen.dart';
 import './screens/home_screen.dart';
 import './screens/game_screen.dart';
+import 'providers/user_answers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (ctx) => Questions(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => UserAnswers(),
         )
       ],
       //child: FutureBuilder(

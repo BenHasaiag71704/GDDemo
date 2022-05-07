@@ -27,15 +27,27 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
       });
     }
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       key: GlobalKey(),
-      backgroundColor: Colors.orange,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Text("userinfo"),
       ),
-      body: SingleChildScrollView(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Colors.blue.shade400, Colors.green.shade200],
+          ),
+        ),
         child: Column(
           children: [
+            SizedBox(
+              height: 77,
+            ),
             ElevatedButton(
               onPressed: () => setState(() {
                 _IsOpen = !_IsOpen;
