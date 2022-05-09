@@ -158,6 +158,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Switch(
                             value: isMath,
                             onChanged: (value) {
+                              Provider.of<Questions>(context, listen: false)
+                                  .willBeDeletedSoon();
                               setState(() {
                                 isMath = value;
                                 print(isMath);

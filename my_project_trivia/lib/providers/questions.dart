@@ -26,8 +26,10 @@ class Questions with ChangeNotifier {
   // int _numOfCorrectAns = 0;
   // int _questionNumber = 0;
   int _currentQuestionNum = 1;
+  bool _isClicked = false;
+  // יבוא בהמשך int _totlScore = 0;
 
-  String? _currentQuestionId = "A8PSDd397UwSAw7AHAxd";
+  String? _currentQuestionId = "0Z8QH7x5eHWz0fgocpeh";
 
   Future<void> fetchQuestions() async {
     if (_questionList.isEmpty) {
@@ -52,26 +54,44 @@ class Questions with ChangeNotifier {
 
     //notifyListeners();
   }
-
-  // bool get isAnswered => this._isAnswered;
-
-  // int get correctAns => this._correctAns;
-
-  // int get selectedAns => this._selectedAns;
-
-  // int get questionNumber => this._questionNumber;
-
-  // int get numOfCorrectAns => this._numOfCorrectAns;
-
-  // Question? getItem(int position) {
-  //   if (position > _questionList.length)
-  //     return null;
-  //   else
-  //     return _questionList[position];
+//יבוא בהמשך
+  // void updateScore() {
+  //   _totlScore = _totlScore + 1;
   // }
+
+  // int get getTotalScore {
+  //   return _totlScore;
+  // }
+
+  void willBeDeletedSoon() async {
+    await FirebaseFirestore.instance.collection('questions').add({
+      "answer": 1,
+      "question": "str",
+      "type": "str",
+      "options": ["0", "1", "2", "3"]
+    });
+  }
 
   List<Question> get getTheList {
     return [..._questionList];
+  }
+
+  bool get isClicked {
+    return _isClicked;
+  }
+
+  Future<void> switchBack() async {
+    Future.delayed(Duration(milliseconds: 500), () {
+      _isClicked = !_isClicked;
+    });
+  }
+
+  void switchClick(ctx) {
+    _isClicked = !_isClicked;
+    Future.delayed(Duration(milliseconds: 500), () {
+      getNextQuestion(ctx);
+    });
+    notifyListeners();
   }
 
   int get getQnNum {
@@ -96,7 +116,7 @@ class Questions with ChangeNotifier {
   // }
 
   void endGame(BuildContext ctx) {
-    if (_currentQuestionNum == 7) {
+    if (_currentQuestionNum == 20) {
       Navigator.pushReplacement(
           ctx, MaterialPageRoute(builder: (context) => ScoreScreen()));
     }

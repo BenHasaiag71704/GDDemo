@@ -15,8 +15,10 @@ class Option extends StatefulWidget {
   Option({
     Key? key,
     this.optionNum,
+    this.clicked,
   }) : super(key: key);
 
+  bool? clicked;
   int? optionNum;
   @override
   State<Option> createState() => _OptionState();
@@ -36,7 +38,8 @@ class _OptionState extends State<Option> {
       } else {
         return Colors.black;
       }
-    } else {
+    } //
+    else {
       return Colors.black;
     }
   }
@@ -47,28 +50,39 @@ class _OptionState extends State<Option> {
 
   @override
   Widget build(BuildContext context) {
-    bool didColor = false;
-    return selectedOption == null
-        ? GestureDetector(
-            child: optionContainer(context),
-            onTap: () {
-              setState(
-                () {
-                  selectedOption = widget.optionNum;
-                  Provider.of<UserAnswers>(context, listen: false)
-                      .addToListGetUserAnswers(
-                          Provider.of<AppUser>(context, listen: false).uid!,
-                          Provider.of<Questions>(context, listen: false)
-                              .getCurrentId()!);
-                  Provider.of<Questions>(context, listen: false)
-                      .getNextQuestion(context);
-                  Provider.of<Questions>(context, listen: false)
-                      .endGame(context);
-                },
-              );
+    if (selectedOption == null && widget.clicked == false) {
+      return InkWell(
+        child: optionContainer(context),
+        onTap: () {
+          Provider.of<Questions>(context, listen: false).switchClick(context);
+          setState(
+            () {
+              selectedOption = widget.optionNum;
+              Provider.of<UserAnswers>(context, listen: false)
+                  .addToListGetUserAnswers(
+                      Provider.of<AppUser>(context, listen: false).uid!,
+                      Provider.of<Questions>(context, listen: false)
+                          .getCurrentId()!);
+              Provider.of<Questions>(context, listen: false).endGame(context);
             },
-          )
-        : optionContainer(context);
+          );
+          Provider.of<Questions>(context, listen: false).switchBack().then(
+                (value) => Future.delayed(
+                  Duration(milliseconds: 500),
+                  () {
+                    setState(
+                      () {
+                        selectedOption = null;
+                      },
+                    );
+                  },
+                ),
+              );
+        },
+      );
+    } else {
+      return optionContainer(context);
+    }
   }
 
   Container optionContainer(BuildContext context) {
@@ -84,11 +98,14 @@ class _OptionState extends State<Option> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "${widget.optionNum! + 1}. ${Provider.of<Questions>(context).getCurrentQuestion().options[widget.optionNum!]}",
-            style: TextStyle(
-              fontSize: 15,
-              color: getTheRightColor(),
+          Expanded(
+            child: Text(
+              "${Provider.of<Questions>(context).getCurrentQuestion().options[widget.optionNum!]}",
+              style: TextStyle(
+                fontSize: 20,
+                color: getTheRightColor(),
+              ),
+              textAlign: TextAlign.right,
             ),
           ),
           Container(

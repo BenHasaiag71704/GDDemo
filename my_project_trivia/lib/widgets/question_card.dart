@@ -29,25 +29,29 @@ class _QuestionCardState extends State<QuestionCard> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
       ),
-      child: Column(
-        children: [
-          Text(
-            widget.question.question,
-            style: TextStyle(
-              fontSize: 25,
-              color: Colors.black,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(
+              widget.question.question,
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.black,
+              ),
+              textAlign: TextAlign.right,
             ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          ...List.generate(
-            widget.question.options.length,
-            (index) => Option(
-              optionNum: index,
+            SizedBox(
+              height: 25,
             ),
-          ),
-        ],
+            ...List.generate(
+              widget.question.options.length,
+              (index) => Option(
+                optionNum: index,
+                clicked: Provider.of<Questions>(context).isClicked,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

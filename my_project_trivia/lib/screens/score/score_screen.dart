@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_project_trivia/providers/questions.dart';
+import 'package:provider/provider.dart';
 //import 'package:my_project_trivia/providers/user.dart';
 //import 'package:provider/provider.dart';
 
@@ -10,12 +12,6 @@ class ScoreScreen extends StatefulWidget {
 class _ScoreScreenState extends State<ScoreScreen> {
   @override
   Widget build(BuildContext context) {
-    //var userDataCollect = Provider.of<AppUser>(context);
-
-    // setState(() {
-    //   userDataCollect.addScore(_temp);
-    // });
-
     return Scaffold(
       appBar: AppBar(),
       body: Stack(
