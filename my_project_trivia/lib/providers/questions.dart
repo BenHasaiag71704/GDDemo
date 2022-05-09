@@ -27,7 +27,7 @@ class Questions with ChangeNotifier {
   // int _questionNumber = 0;
   int _currentQuestionNum = 1;
   bool _isClicked = false;
-  // יבוא בהמשך int _totlScore = 0;
+  int _totlScore = 0;
 
   String? _currentQuestionId = "0Z8QH7x5eHWz0fgocpeh";
 
@@ -54,14 +54,14 @@ class Questions with ChangeNotifier {
 
     //notifyListeners();
   }
-//יבוא בהמשך
-  // void updateScore() {
-  //   _totlScore = _totlScore + 1;
-  // }
 
-  // int get getTotalScore {
-  //   return _totlScore;
-  // }
+  void updateScore() {
+    _totlScore = _totlScore + 1;
+  }
+
+  int get getTotalScore {
+    return _totlScore;
+  }
 
   void willBeDeletedSoon() async {
     await FirebaseFirestore.instance.collection('questions').add({

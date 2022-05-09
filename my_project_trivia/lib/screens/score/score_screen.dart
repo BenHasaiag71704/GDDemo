@@ -12,6 +12,7 @@ class ScoreScreen extends StatefulWidget {
 class _ScoreScreenState extends State<ScoreScreen> {
   @override
   Widget build(BuildContext context) {
+    int temp = Provider.of<Questions>(context).getTotalScore;
     return Scaffold(
       appBar: AppBar(),
       body: Stack(
@@ -26,7 +27,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
               ),
               Spacer(),
               Text(
-                "10",
+                "${temp}",
                 style: TextStyle(fontSize: 30),
               ),
               Spacer(flex: 3),

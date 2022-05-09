@@ -58,6 +58,13 @@ class _OptionState extends State<Option> {
           setState(
             () {
               selectedOption = widget.optionNum;
+
+              if (selectedOption ==
+                  Provider.of<Questions>(context, listen: false)
+                      .getCurrentQuestion()
+                      .answer) {
+                Provider.of<Questions>(context, listen: false).updateScore();
+              }
               Provider.of<UserAnswers>(context, listen: false)
                   .addToListGetUserAnswers(
                       Provider.of<AppUser>(context, listen: false).uid!,
