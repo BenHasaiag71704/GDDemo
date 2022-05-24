@@ -16,8 +16,58 @@ class ProgressBar extends StatefulWidget {
 }
 
 class _ProgressBarState extends State<ProgressBar> {
+  int x = 0;
   @override
   Widget build(BuildContext context) {
+    if (Provider.of<Questions>(context, listen: false).timerResert == true) {
+      x = 0;
+
+      Provider.of<Questions>(context, listen: false).startTimerAgain();
+    }
+    while (x < 60) {
+      Future.delayed(Duration(seconds: 1), () {
+        setState(() {
+          x = x + 1;
+        });
+      });
+      return Container(
+        width: double.infinity,
+        height: 35,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black, width: 3),
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Stack(
+          children: [
+            LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraint) {
+                return Container(
+                  width: constraint.maxWidth * x * (1 / 6) * 0.1,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [Colors.red, Colors.green],
+                    ),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                );
+              },
+            ),
+            Positioned.fill(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: [
+                    Text("${(60 - (x).round())}"),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
     return Container(
       width: double.infinity,
       height: 35,
@@ -30,7 +80,7 @@ class _ProgressBarState extends State<ProgressBar> {
           LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraint) {
               return Container(
-                width: constraint.maxWidth * 0.5,
+                width: constraint.maxWidth,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
@@ -47,7 +97,7 @@ class _ProgressBarState extends State<ProgressBar> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 children: [
-                  Text("${(60 - (0.5 * 60).round())}"),
+                  Text("select an answer and keep going!"),
                 ],
               ),
             ),

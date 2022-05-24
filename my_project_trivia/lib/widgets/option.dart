@@ -26,6 +26,7 @@ class Option extends StatefulWidget {
 
 class _OptionState extends State<Option> {
   int? selectedOption;
+  bool b = false;
 
   Color getTheRightColor() {
     if (selectedOption != null) {
@@ -58,19 +59,21 @@ class _OptionState extends State<Option> {
           setState(
             () {
               selectedOption = widget.optionNum;
-
               if (selectedOption ==
                   Provider.of<Questions>(context, listen: false)
                       .getCurrentQuestion()
                       .answer) {
                 Provider.of<Questions>(context, listen: false).updateScore();
+                b = true;
               }
               Provider.of<UserAnswers>(context, listen: false)
                   .addToListGetUserAnswers(
                       Provider.of<AppUser>(context, listen: false).uid!,
                       Provider.of<Questions>(context, listen: false)
-                          .getCurrentId()!);
+                          .getCurrentId()!,
+                      b);
               Provider.of<Questions>(context, listen: false).endGame(context);
+              b = false;
             },
           );
           Provider.of<Questions>(context, listen: false).switchBack().then(

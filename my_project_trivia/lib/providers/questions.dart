@@ -29,12 +29,14 @@ class Questions with ChangeNotifier {
   bool _isClicked = false;
   int _totlScore = 0;
 
+  bool timerResert = false;
+
   String? _currentQuestionId = "0Z8QH7x5eHWz0fgocpeh";
 
   Future<void> fetchQuestions() async {
     if (_questionList.isEmpty) {
       try {
-        FirebaseFirestore.instance.collection('questions').get().then(
+        await FirebaseFirestore.instance.collection('questions').get().then(
           (snapshot) {
             snapshot.docs.forEach((document) {
               _questionList.add(Question(
@@ -51,8 +53,11 @@ class Questions with ChangeNotifier {
         print(e);
       }
     } else {}
+  }
 
-    //notifyListeners();
+  void cleanQn() {
+    _questionList = [];
+    notifyListeners();
   }
 
   void updateScore() {
@@ -122,7 +127,13 @@ class Questions with ChangeNotifier {
     }
   }
 
+  void startTimerAgain() {
+    timerResert = false;
+    //notifyListeners();
+  }
+
   void getNextQuestion(BuildContext ctx) {
+    timerResert = true;
     Question q = _questionList.firstWhere(
       (element) {
         return Provider.of<UserAnswers>(ctx, listen: false).isExistCheck(

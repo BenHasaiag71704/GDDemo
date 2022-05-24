@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //import '../models/question.dart';
 //--
 import 'package:my_project_trivia/providers/questions.dart';
+import 'package:my_project_trivia/providers/user_answers.dart';
 
 import '../providers/user.dart';
 import 'package:provider/provider.dart';
@@ -36,17 +37,24 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isMath = true;
 
   @override
-  void didChangeDependencies() async {
+  void didChangeDependencies() {
     setState(() {
       _isLoading = true;
     });
-    // await Provider.of<AppUser>(context).getUid();
 
-    await Provider.of<Questions>(context, listen: false).fetchQuestions();
-    super.didChangeDependencies();
-    setState(() {
-      _isLoading = false;
+    Provider.of<UserAnswers>(context, listen: false)
+        .fetchAnswerdQn()
+        .then((value) {
+      Provider.of<Questions>(context, listen: false)
+          .fetchQuestions()
+          .then((value) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
     });
+
+    super.didChangeDependencies();
   }
 
   // @override
@@ -85,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var userDataCollect = Provider.of<AppUser>(context);
     var questionList = Provider.of<Questions>(context).getTheList;
+    var answerList = Provider.of<UserAnswers>(context).getTheAnswers;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -113,6 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
                 onChanged: (itemIdentifier) {
                   if (itemIdentifier == 'logout') {
+                    Provider.of<Questions>(context, listen: false).cleanQn();
+                    Provider.of<UserAnswers>(context, listen: false)
+                        .cleanAnsQn();
                     FirebaseAuth.instance.signOut();
                   }
                 }),
@@ -138,13 +150,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 1,
                   ),
                   Text(
-                    "ברוכים הבאים למסך הראשי",
+                    "welcome to home screen",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),
-                  // Text(questionList[0].question),
+                  //Text(answerList[1].ansTime.toString()),
                   // Text(questionList[1].question),
                   // Text(questionList[2].question),
                   // Text(questionList[3].question),
@@ -223,7 +235,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        if (wantedGame == Prefs.None) {
+                        int temp = Provider.of<UserAnswers>(context,
+                                listen: false)
+                            .getSingleUserQnAnswerd(
+                                (Provider.of<AppUser>(context, listen: false)
+                                    .uid));
+                        if (temp >= questionList.length &&
+                            temp != 0 &&
+                            questionList.isNotEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("ענית כבר על כל השאלות במשחק",
+                                  textAlign: TextAlign.center)));
+                        } else if (wantedGame == Prefs.None) {
                           print("hello");
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_project_trivia/providers/user_answers.dart';
 import 'package:provider/provider.dart';
 import '../providers/user.dart';
 
@@ -16,6 +17,8 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   Widget build(BuildContext context) {
     var userDataCollect = Provider.of<AppUser>(context);
+    var answerList = Provider.of<UserAnswers>(context).getTheAnswers;
+
     if (userDataCollect.getTotalPoint >= 1) {
       setState(() {
         _NoPoint = false;
