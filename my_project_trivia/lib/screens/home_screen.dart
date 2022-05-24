@@ -94,7 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
     var userDataCollect = Provider.of<AppUser>(context);
     var questionList = Provider.of<Questions>(context).getTheList;
     var answerList = Provider.of<UserAnswers>(context).getTheAnswers;
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -235,6 +234,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
+                        Provider.of<Questions>(context, listen: false)
+                            .getFirstId(context);
+
                         int temp = Provider.of<UserAnswers>(context,
                                 listen: false)
                             .getSingleUserQnAnswerd(
@@ -259,8 +261,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                           print("hello");
                         } else {
-                          Navigator.of(context).pushNamed(GameScreen.routeName,
-                              arguments: wantedGame);
+                          int lng =
+                              Provider.of<Questions>(context, listen: false)
+                                  .getTheList
+                                  .length;
+                          int anslng = Provider.of<UserAnswers>(context,
+                                  listen: false)
+                              .getSingleUserQnAnswerd(
+                                  Provider.of<AppUser>(context, listen: false)
+                                      .uid);
+                          int end = lng - anslng;
+                          Provider.of<Questions>(context, listen: false)
+                              .resetQnNum();
+                          Navigator.of(context)
+                              .pushNamed(GameScreen.routeName, arguments: end);
                         }
                       },
                       style: ElevatedButton.styleFrom(

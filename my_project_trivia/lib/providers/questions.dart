@@ -3,6 +3,7 @@ import 'dart:io';
 //import 'dart:js';
 
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:my_project_trivia/models/question.dart';
 import 'package:my_project_trivia/models/user_question_answer.dart';
 import 'package:my_project_trivia/providers/user.dart';
@@ -20,6 +21,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class Questions with ChangeNotifier {
   late List<Question> _questionList = [];
+  late List<Question> _tempQuestionList = [];
+
   // bool _isAnswered = false;
   // late int _correctAns;
   // late int _selectedAns;
@@ -31,7 +34,8 @@ class Questions with ChangeNotifier {
 
   bool timerResert = false;
 
-  String? _currentQuestionId = "0Z8QH7x5eHWz0fgocpeh";
+  //String? _currentQuestionId = "0Z8QH7x5eHWz0fgocpeh";
+  String? _currentQuestionId = "";
 
   Future<void> fetchQuestions() async {
     if (_questionList.isEmpty) {
@@ -53,6 +57,23 @@ class Questions with ChangeNotifier {
         print(e);
       }
     } else {}
+    _tempQuestionList = _questionList;
+  }
+
+  void resetQnNum() {
+    _currentQuestionNum = 1;
+    notifyListeners();
+  }
+
+  void getFirstId(BuildContext ctx) {
+    Question q = _questionList.firstWhere(
+      (element) {
+        return Provider.of<UserAnswers>(ctx, listen: false).isExistCheck(
+                element.id, Provider.of<AppUser>(ctx, listen: false).uid!) ==
+            false;
+      },
+    );
+    _currentQuestionId = q.id;
   }
 
   void cleanQn() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_project_trivia/providers/questions.dart';
 import 'package:my_project_trivia/providers/user.dart';
+import 'package:my_project_trivia/providers/user_answers.dart';
 import 'package:provider/provider.dart';
 import '../widgets/body.dart';
 
@@ -55,20 +56,24 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final temp = ModalRoute.of(context)!.settings.arguments.toString();
+    final end = ModalRoute.of(context)!.settings.arguments.toString();
     var userDataCollect = Provider.of<AppUser>(context);
-
-    Prefs pre = Prefs.values.firstWhere(
-        (keyword) => keyword.toString().toUpperCase() == temp.toUpperCase());
-
+    // Prefs pre = Prefs.values.firstWhere(
+    //     (keyword) => keyword.toString().toUpperCase() == temp.toUpperCase());
+    int end2 = int.parse(end);
     bool wantMath;
     bool wantEnglish;
     bool wantHberew;
 
-    wantMath = checkmath(pre);
-    wantEnglish = checkenglish(pre);
-    wantHberew = checkhebrew(pre);
+    // wantMath = checkmath(pre);
+    // wantEnglish = checkenglish(pre);
+    // wantHberew = checkhebrew(pre);
+    // int lng = Provider.of<Questions>(context).getTheList.length;
 
+    // int anslng = Provider.of<UserAnswers>(context)
+    //     .getSingleUserQnAnswerd(Provider.of<AppUser>(context).uid);
+
+    // int end = lng - anslng;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -76,7 +81,7 @@ class _GameScreenState extends State<GameScreen> {
         backgroundColor: Colors.transparent,
         actions: [],
       ),
-      body: Body(),
+      body: Body(totalQnNum: end2),
     );
   }
 }
