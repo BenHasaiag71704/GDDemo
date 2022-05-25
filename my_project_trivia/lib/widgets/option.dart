@@ -72,7 +72,17 @@ class _OptionState extends State<Option> {
                       Provider.of<Questions>(context, listen: false)
                           .getCurrentId()!,
                       b);
-              Provider.of<Questions>(context, listen: false).endGame(context);
+
+              int lng = Provider.of<Questions>(context, listen: false)
+                  .getTheList
+                  .length;
+              int anslng = Provider.of<UserAnswers>(context, listen: false)
+                  .getSingleUserQnAnswerd(
+                      Provider.of<AppUser>(context, listen: false).uid);
+              int end = lng - anslng;
+
+              Provider.of<Questions>(context, listen: false)
+                  .endGame(context, end);
               b = false;
             },
           );

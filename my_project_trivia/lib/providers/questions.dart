@@ -21,7 +21,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class Questions with ChangeNotifier {
   late List<Question> _questionList = [];
-  late List<Question> _tempQuestionList = [];
+  late List<Question> _finalQuestionList = [];
 
   // bool _isAnswered = false;
   // late int _correctAns;
@@ -53,11 +53,33 @@ class Questions with ChangeNotifier {
             });
           },
         );
+        _finalQuestionList = _questionList;
       } catch (e) {
         print(e);
       }
     } else {}
-    _tempQuestionList = _questionList;
+  }
+
+  void getBackMath() {
+    _finalQuestionList.forEach((element) {
+      if (element.type == "math") {
+        _questionList.add(element);
+      }
+    });
+    notifyListeners();
+    print(_questionList.length);
+  }
+
+  void cleanMath() {
+    List<Question> temp = [];
+    _questionList.forEach((element) {
+      if (element.type != "math") {
+        temp.add(element);
+      }
+    });
+    _questionList = temp;
+    notifyListeners();
+    print(_questionList.length);
   }
 
   void resetQnNum() {
@@ -102,6 +124,10 @@ class Questions with ChangeNotifier {
     return [..._questionList];
   }
 
+  // List<Question> get getTheFinalList {
+  //   return [..._finalQuestionList];
+  // }
+
   bool get isClicked {
     return _isClicked;
   }
@@ -141,8 +167,8 @@ class Questions with ChangeNotifier {
   //   }
   // }
 
-  void endGame(BuildContext ctx) {
-    if (_currentQuestionNum == 20) {
+  void endGame(BuildContext ctx, int Num) {
+    if (Num == 0) {
       Navigator.pushReplacement(
           ctx, MaterialPageRoute(builder: (context) => ScoreScreen()));
     }

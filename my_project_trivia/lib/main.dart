@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_project_trivia/providers/questions.dart';
+import 'package:my_project_trivia/screens/score/score_screen.dart';
 import 'package:provider/provider.dart';
 import './providers/user.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
             }),
         routes: {
           GameScreen.routeName: (context) => GameScreen(),
+          ScoreScreen.routeName: (context) => ScoreScreen()
         },
       ),
     );

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 //--
 import 'package:my_project_trivia/providers/questions.dart';
 import 'package:my_project_trivia/providers/user_answers.dart';
+import 'package:my_project_trivia/screens/score/score_screen.dart';
 
 import '../providers/user.dart';
 import 'package:provider/provider.dart';
@@ -169,11 +170,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           Switch(
                             value: isMath,
                             onChanged: (value) {
-                              Provider.of<Questions>(context, listen: false)
-                                  .willBeDeletedSoon();
+                              // Provider.of<Questions>(context, listen: false)
+                              //     .willBeDeletedSoon();
                               setState(() {
                                 isMath = value;
                                 print(isMath);
+                                if (isMath == false) {
+                                  Provider.of<Questions>(context, listen: false)
+                                      .cleanMath();
+                                }
+                                if (isMath == true) {
+                                  Provider.of<Questions>(context, listen: false)
+                                      .getBackMath();
+                                }
                                 wantedGame =
                                     updateEnum(isHebrew, isEnglish, isMath);
                                 print(wantedGame);
@@ -234,20 +243,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        Provider.of<Questions>(context, listen: false)
-                            .getFirstId(context);
+                        //
+                        //
+                        //
+                        //
+                        //
+                        int lng = Provider.of<Questions>(context, listen: false)
+                            .getTheList
+                            .length;
+                        int anslng =
+                            Provider.of<UserAnswers>(context, listen: false)
+                                .getSingleUserQnAnswerd(
+                                    Provider.of<AppUser>(context, listen: false)
+                                        .uid);
+                        int end = lng - anslng;
+                        if (end <= 0) {
+                          // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          //     content: Text("ענית כבר על כל השאלות במשחק",
+                          //         textAlign: TextAlign.center)));
 
-                        int temp = Provider.of<UserAnswers>(context,
-                                listen: false)
-                            .getSingleUserQnAnswerd(
-                                (Provider.of<AppUser>(context, listen: false)
-                                    .uid));
-                        if (temp >= questionList.length &&
-                            temp != 0 &&
-                            questionList.isNotEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("ענית כבר על כל השאלות במשחק",
-                                  textAlign: TextAlign.center)));
+                          // Navigator.pushReplacement(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => ScoreScreen()));
+
+                          Navigator.of(context)
+                              .pushNamed(ScoreScreen.routeName);
                         } else if (wantedGame == Prefs.None) {
                           print("hello");
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -261,6 +282,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                           print("hello");
                         } else {
+                          Provider.of<Questions>(context, listen: false)
+                              .getFirstId(context);
                           int lng =
                               Provider.of<Questions>(context, listen: false)
                                   .getTheList
@@ -273,6 +296,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           int end = lng - anslng;
                           Provider.of<Questions>(context, listen: false)
                               .resetQnNum();
+
+                          // Future.delayed(Duration(milliseconds: 500), () {
+                          //   Navigator.of(context).pushNamed(
+                          //       GameScreen.routeName,
+                          //       arguments: end);
+                          // });
                           Navigator.of(context)
                               .pushNamed(GameScreen.routeName, arguments: end);
                         }

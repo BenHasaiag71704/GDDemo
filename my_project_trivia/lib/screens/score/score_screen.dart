@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 //import 'package:provider/provider.dart';
 
 class ScoreScreen extends StatefulWidget {
+  static const routeName = '/score_screen';
   @override
   State<ScoreScreen> createState() => _ScoreScreenState();
 }
@@ -22,12 +23,12 @@ class _ScoreScreenState extends State<ScoreScreen> {
             children: [
               Spacer(flex: 3),
               Text(
-                "Score",
+                "כל הכבוד!",
                 style: TextStyle(fontSize: 30),
               ),
               Spacer(),
               Text(
-                "${temp}",
+                "ענית על כל השאלות במאגר!",
                 style: TextStyle(fontSize: 30),
               ),
               Spacer(flex: 3),
