@@ -35,6 +35,36 @@ class UserAnswers extends ChangeNotifier {
     print(_userAnswerList);
   }
 
+  int getNumOfAnsweredHebrewQn(String? userid) {
+    int temp = 0;
+    _userAnswerList.forEach((element) {
+      if (element.uid == userid && element.type == "hebrew") {
+        temp = temp + 1;
+      }
+    });
+    return temp;
+  }
+
+  int getNumOfAnsweredMathQn(String? userid) {
+    int temp = 0;
+    _userAnswerList.forEach((element) {
+      if (element.uid == userid && element.type == "math") {
+        temp = temp + 1;
+      }
+    });
+    return temp;
+  }
+
+  int getNumOfAnsweredEnglishQn(String? userid) {
+    int temp = 0;
+    _userAnswerList.forEach((element) {
+      if (element.uid == userid && element.type == "english") {
+        temp = temp + 1;
+      }
+    });
+    return temp;
+  }
+
   void cleanAnsQn() {
     _userAnswerList = [];
     notifyListeners();

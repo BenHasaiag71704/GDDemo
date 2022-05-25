@@ -265,23 +265,37 @@ class _HomeScreenState extends State<HomeScreen> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        int anslng =
-                            Provider.of<UserAnswers>(context, listen: false)
-                                .getSingleUserQnAnswerd(
-                                    Provider.of<AppUser>(context, listen: false)
-                                        .uid);
+                        int anslng = 0;
+
+                        if (isHebrew == true) {
+                          anslng = anslng +
+                              Provider.of<UserAnswers>(context, listen: false)
+                                  .getNumOfAnsweredHebrewQn(
+                                      Provider.of<AppUser>(context,
+                                              listen: false)
+                                          .uid);
+                        }
+                        if (isMath == true) {
+                          anslng = anslng +
+                              Provider.of<UserAnswers>(context, listen: false)
+                                  .getNumOfAnsweredMathQn(Provider.of<AppUser>(
+                                          context,
+                                          listen: false)
+                                      .uid);
+                        }
+                        if (isEnglish == true) {
+                          anslng = anslng +
+                              Provider.of<UserAnswers>(context, listen: false)
+                                  .getNumOfAnsweredEnglishQn(
+                                      Provider.of<AppUser>(context,
+                                              listen: false)
+                                          .uid);
+                        }
 
                         int lng = Provider.of<Questions>(context, listen: false)
                             .getTheList
                             .length;
-                        // int anslng =
-                        //     Provider.of<UserAnswers>(context, listen: false)
-                        //         .improvedgetSingleUserQnAnswerd(
-                        //             Provider.of<AppUser>(context, listen: false)
-                        //                 .uid,
-                        //             isMath,
-                        //             isHebrew,
-                        //             isEnglish);
+
                         int end = lng - anslng;
                         if (wantedGame == Prefs.None) {
                           print("hello");
@@ -379,3 +393,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           //     context,
                           //     MaterialPageRoute(
                           //         builder: (context) => ScoreScreen()));
+/// was 298
+///                         // int anslng =
+                        //     Provider.of<UserAnswers>(context, listen: false)
+                        //         .improvedgetSingleUserQnAnswerd(
+                        //             Provider.of<AppUser>(context, listen: false)
+                        //                 .uid,
+                        //             isMath,
+                        //             isHebrew,
+                        //             isEnglish);
