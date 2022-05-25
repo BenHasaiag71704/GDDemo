@@ -23,6 +23,7 @@ class UserAnswers extends ChangeNotifier {
                 isCorrect: document['isCorrect'],
                 qid: document['qid'],
                 uid: document['uid'],
+                type: document['type'],
               ));
             });
           },
@@ -53,11 +54,21 @@ class UserAnswers extends ChangeNotifier {
     return count;
   }
 
-  void addToListGetUserAnswers(String uid, String qid, bool b1) async {
+  void addToListGetUserAnswers(
+      String uid, String qid, String type, bool b1) async {
     _userAnswerList.add(UserQuestionAnswer(
-        uid: uid, qid: qid, ansTime: DateTime.now(), isCorrect: true));
-    await FirebaseFirestore.instance.collection('UserAnswer').add(
-        {"uid": uid, "qid": qid, "ansTime": DateTime.now(), "isCorrect": b1});
+        uid: uid,
+        qid: qid,
+        type: type,
+        ansTime: DateTime.now(),
+        isCorrect: true));
+    await FirebaseFirestore.instance.collection('UserAnswer').add({
+      "uid": uid,
+      "qid": qid,
+      "type": type,
+      "ansTime": DateTime.now(),
+      "isCorrect": b1
+    });
     notifyListeners();
   }
 

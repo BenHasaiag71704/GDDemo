@@ -23,6 +23,10 @@ class Questions with ChangeNotifier {
   late List<Question> _questionList = [];
   late List<Question> _finalQuestionList = [];
 
+  late List<Question> _onlyMathList = [];
+  late List<Question> _onlyHberewList = [];
+  late List<Question> _onlyEnglishList = [];
+
   // bool _isAnswered = false;
   // late int _correctAns;
   // late int _selectedAns;
@@ -38,7 +42,7 @@ class Questions with ChangeNotifier {
   String? _currentQuestionId = "";
 
   Future<void> fetchQuestions() async {
-    if (_questionList.isEmpty) {
+    if (_questionList.isEmpty && _onlyMathList.isEmpty) {
       try {
         await FirebaseFirestore.instance.collection('questions').get().then(
           (snapshot) {
@@ -60,12 +64,71 @@ class Questions with ChangeNotifier {
     } else {}
   }
 
+  String getType() {
+    Question q = _finalQuestionList
+        .firstWhere((element) => (element.id == _currentQuestionId));
+    return q.type;
+  }
+
+  void setAlltheOneTypeLists() {
+    if (_onlyMathList.isEmpty &&
+        _onlyEnglishList.isEmpty &&
+        _onlyHberewList.isEmpty) {
+      _finalQuestionList.forEach((element) {
+        if (element.type == "math") {
+          _onlyMathList.add(element);
+        }
+        if (element.type == "hebrew") {
+          _onlyHberewList.add(element);
+        }
+        if (element.type == "english") {
+          _onlyEnglishList.add(element);
+        }
+      });
+    }
+  }
+
+  void getBackEnglish() {
+    if (_questionList.isEmpty == false) {
+      _finalQuestionList.forEach((element) {
+        if (element.type == "english") {
+          _questionList.add(element);
+        }
+      });
+    } else {
+      _questionList = _onlyEnglishList;
+    }
+
+    notifyListeners();
+    print(_questionList.length);
+  }
+
+  void getBackHebrew() {
+    if (_questionList.isEmpty == false) {
+      _finalQuestionList.forEach((element) {
+        if (element.type == "hebrew") {
+          _questionList.add(element);
+        }
+      });
+    } else {
+      _questionList = _onlyHberewList;
+    }
+
+    notifyListeners();
+    print(_questionList.length);
+  }
+
   void getBackMath() {
-    _finalQuestionList.forEach((element) {
-      if (element.type == "math") {
-        _questionList.add(element);
-      }
-    });
+    if (_questionList.isEmpty == false) {
+      _finalQuestionList.forEach((element) {
+        if (element.type == "math") {
+          _questionList.add(element);
+        }
+      });
+    } else {
+      _questionList = _onlyMathList;
+    }
+
     notifyListeners();
     print(_questionList.length);
   }
@@ -74,6 +137,30 @@ class Questions with ChangeNotifier {
     List<Question> temp = [];
     _questionList.forEach((element) {
       if (element.type != "math") {
+        temp.add(element);
+      }
+    });
+    _questionList = temp;
+    notifyListeners();
+    print(_questionList.length);
+  }
+
+  void cleanHebrew() {
+    List<Question> temp = [];
+    _questionList.forEach((element) {
+      if (element.type != "hebrew") {
+        temp.add(element);
+      }
+    });
+    _questionList = temp;
+    notifyListeners();
+    print(_questionList.length);
+  }
+
+  void cleanEnglish() {
+    List<Question> temp = [];
+    _questionList.forEach((element) {
+      if (element.type != "english") {
         temp.add(element);
       }
     });
@@ -261,3 +348,11 @@ class Questions with ChangeNotifier {
   //     },
   //   );
   // }
+
+    // int i = _finalQuestionList.length;
+    // int x = 0;
+    // while (x < i - 1) {
+    //   if (_finalQuestionList[x].type == "math") {
+    //     _questionList.add(_finalQuestionList[x]);
+    //   }
+    // }

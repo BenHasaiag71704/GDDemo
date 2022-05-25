@@ -71,6 +71,7 @@ class _OptionState extends State<Option> {
                       Provider.of<AppUser>(context, listen: false).uid!,
                       Provider.of<Questions>(context, listen: false)
                           .getCurrentId()!,
+                      Provider.of<Questions>(context, listen: false).getType(),
                       b);
 
               int lng = Provider.of<Questions>(context, listen: false)

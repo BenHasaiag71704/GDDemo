@@ -95,6 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
     var userDataCollect = Provider.of<AppUser>(context);
     var questionList = Provider.of<Questions>(context).getTheList;
     var answerList = Provider.of<UserAnswers>(context).getTheAnswers;
+    Provider.of<Questions>(context).setAlltheOneTypeLists();
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -204,6 +206,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               setState(() {
                                 isHebrew = value;
                                 print(isHebrew);
+                                if (isHebrew == false) {
+                                  Provider.of<Questions>(context, listen: false)
+                                      .cleanHebrew();
+                                }
+                                if (isHebrew == true) {
+                                  Provider.of<Questions>(context, listen: false)
+                                      .getBackHebrew();
+                                }
                                 wantedGame =
                                     updateEnum(isHebrew, isEnglish, isMath);
                                 print(wantedGame);
@@ -222,13 +232,25 @@ class _HomeScreenState extends State<HomeScreen> {
                           Switch(
                             value: isEnglish,
                             onChanged: (value) {
-                              setState(() {
-                                isEnglish = value;
-                                print(isEnglish);
-                                wantedGame =
-                                    updateEnum(isHebrew, isEnglish, isMath);
-                                print(wantedGame);
-                              });
+                              setState(
+                                () {
+                                  isEnglish = value;
+                                  print(isEnglish);
+                                  if (isEnglish == false) {
+                                    Provider.of<Questions>(context,
+                                            listen: false)
+                                        .cleanEnglish();
+                                  }
+                                  if (isEnglish == true) {
+                                    Provider.of<Questions>(context,
+                                            listen: false)
+                                        .getBackEnglish();
+                                    wantedGame =
+                                        updateEnum(isHebrew, isEnglish, isMath);
+                                    print(wantedGame);
+                                  }
+                                },
+                              );
                             },
                             activeTrackColor: Colors.lightGreenAccent,
                             activeColor: Colors.green,
@@ -243,33 +265,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        //
-                        //
-                        //
-                        //
-                        //
-                        int lng = Provider.of<Questions>(context, listen: false)
-                            .getTheList
-                            .length;
                         int anslng =
                             Provider.of<UserAnswers>(context, listen: false)
                                 .getSingleUserQnAnswerd(
                                     Provider.of<AppUser>(context, listen: false)
                                         .uid);
+
+                        int lng = Provider.of<Questions>(context, listen: false)
+                            .getTheList
+                            .length;
+                        // int anslng =
+                        //     Provider.of<UserAnswers>(context, listen: false)
+                        //         .improvedgetSingleUserQnAnswerd(
+                        //             Provider.of<AppUser>(context, listen: false)
+                        //                 .uid,
+                        //             isMath,
+                        //             isHebrew,
+                        //             isEnglish);
                         int end = lng - anslng;
-                        if (end <= 0) {
-                          // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          //     content: Text("ענית כבר על כל השאלות במשחק",
-                          //         textAlign: TextAlign.center)));
-
-                          // Navigator.pushReplacement(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => ScoreScreen()));
-
-                          Navigator.of(context)
-                              .pushNamed(ScoreScreen.routeName);
-                        } else if (wantedGame == Prefs.None) {
+                        if (wantedGame == Prefs.None) {
                           print("hello");
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -280,20 +294,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               backgroundColor: Colors.blue,
                             ),
                           );
-                          print("hello");
+                        } else if (end <= 0) {
+                          Navigator.of(context)
+                              .pushNamed(ScoreScreen.routeName);
                         } else {
                           Provider.of<Questions>(context, listen: false)
                               .getFirstId(context);
-                          int lng =
-                              Provider.of<Questions>(context, listen: false)
-                                  .getTheList
-                                  .length;
-                          int anslng = Provider.of<UserAnswers>(context,
-                                  listen: false)
-                              .getSingleUserQnAnswerd(
-                                  Provider.of<AppUser>(context, listen: false)
-                                      .uid);
-                          int end = lng - anslng;
                           Provider.of<Questions>(context, listen: false)
                               .resetQnNum();
 
@@ -363,3 +369,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+// was at 276
+                          //  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          //     content: Text("ענית כבר על כל השאלות במשחק",
+                          //         textAlign: TextAlign.center)));
+
+                          // Navigator.pushReplacement(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => ScoreScreen()));
