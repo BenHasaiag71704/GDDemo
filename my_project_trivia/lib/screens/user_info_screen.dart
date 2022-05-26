@@ -35,7 +35,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
       key: GlobalKey(),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 0.0,
         title: Text("userinfo"),
       ),
       body: Container(
@@ -69,11 +69,11 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   ),
                 ),
               ),
-              color: Colors.green,
+              color: Colors.transparent,
             ),
             if (_IsOpen)
               Card(
-                color: Colors.pink[200],
+                color: Colors.transparent,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
@@ -120,7 +120,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
             //     )),
             Card(
               key: ValueKey("info"),
-              color: Colors.pink[200],
+              color: Colors.transparent,
               //color: Colors.black,
               child: Column(
                 children: [
