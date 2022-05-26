@@ -35,6 +35,42 @@ class UserAnswers extends ChangeNotifier {
     print(_userAnswerList);
   }
 
+  int getMathScore(String? userid) {
+    int temp = 0;
+    _userAnswerList.forEach((element) {
+      if (element.uid == userid &&
+          element.type == "math" &&
+          element.isCorrect == true) {
+        temp = temp + 1;
+      }
+    });
+    return temp;
+  }
+
+  int getHebrewScore(String? userid) {
+    int temp = 0;
+    _userAnswerList.forEach((element) {
+      if (element.uid == userid && element.type == "hebrew") {
+        if (element.isCorrect == true) {
+          temp++;
+        }
+      }
+    });
+    return temp;
+  }
+
+  int getEnglishScore(String? userid) {
+    int temp = 0;
+    _userAnswerList.forEach((element) {
+      if (element.uid == userid &&
+          element.type == "english" &&
+          element.isCorrect == true) {
+        temp = temp + 1;
+      }
+    });
+    return temp;
+  }
+
   int getNumOfAnsweredHebrewQn(String? userid) {
     int temp = 0;
     _userAnswerList.forEach((element) {
@@ -91,7 +127,7 @@ class UserAnswers extends ChangeNotifier {
         qid: qid,
         type: type,
         ansTime: DateTime.now(),
-        isCorrect: true));
+        isCorrect: b1));
     await FirebaseFirestore.instance.collection('UserAnswer').add({
       "uid": uid,
       "qid": qid,

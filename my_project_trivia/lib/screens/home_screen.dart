@@ -345,6 +345,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
+                          userDataCollect.setHebrewScore(
+                              Provider.of<UserAnswers>(context, listen: false)
+                                  .getHebrewScore(Provider.of<AppUser>(context,
+                                          listen: false)
+                                      .uid!));
+
+                          userDataCollect.setEnglishScore(
+                              Provider.of<UserAnswers>(context, listen: false)
+                                  .getEnglishScore(Provider.of<AppUser>(context,
+                                          listen: false)
+                                      .uid!));
+
+                          userDataCollect.setMathScore(
+                              Provider.of<UserAnswers>(context, listen: false)
+                                  .getMathScore(Provider.of<AppUser>(context,
+                                          listen: false)
+                                      .uid!));
+
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (ctx) => UserInfoScreen(),
