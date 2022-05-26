@@ -162,14 +162,25 @@ class AppUser with ChangeNotifier {
     this.englishpoint = englishscore;
   }
 
-  // void addScore(int score) {
-  //   FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(uid)
-  //       .update({'totalpoint': totalPoint});
-  //   this.totalPoint = getTotalPoint + score;
-  //   notifyListeners();
-  // }
+  void addTotalScore(int a, int b, int c) {
+    int d = a + b + c;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({'totalPoint': d});
+    this.totalPoint = d;
+    notifyListeners();
+  }
+
+  void setLostPoint(int correct, int lng) {
+    int d = lng - correct;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({'lostpoint': d});
+    this.lostpoint = d;
+    notifyListeners();
+  }
 
   // void setUserName(String name) {
   //   username = name;

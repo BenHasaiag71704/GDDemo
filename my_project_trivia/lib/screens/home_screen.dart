@@ -363,6 +363,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           listen: false)
                                       .uid!));
 
+                          userDataCollect.addTotalScore(
+                              userDataCollect.englishpoint,
+                              userDataCollect.hebrewpoint,
+                              userDataCollect.mathpoint);
+
+                          userDataCollect.setLostPoint(
+                              userDataCollect.totalPoint,
+                              Provider.of<UserAnswers>(context, listen: false)
+                                  .getSingleUserQnAnswerd(userDataCollect.uid));
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (ctx) => UserInfoScreen(),

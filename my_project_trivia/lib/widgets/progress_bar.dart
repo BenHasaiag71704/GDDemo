@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:io';
+//import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,10 +18,14 @@ class ProgressBar extends StatefulWidget {
 class _ProgressBarState extends State<ProgressBar> {
   int x = 0;
   @override
+  // void dispose() {
+  //   super.dispose();
+  // }
+
+  @override
   Widget build(BuildContext context) {
     if (Provider.of<Questions>(context, listen: false).timerResert == true) {
       x = 0;
-
       Provider.of<Questions>(context, listen: false).startTimerAgain();
     }
     while (x < 60) {

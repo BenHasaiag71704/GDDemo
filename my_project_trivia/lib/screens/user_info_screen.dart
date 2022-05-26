@@ -145,9 +145,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                         _NoPoint
                             ? "אחוז הצלחה : אחוז ההצלחה עוד לא הוגדר"
                             : "אחוז ההצלחה שלך הוא : " +
-                                (((userDataCollect.getTotalPoint -
-                                                userDataCollect.getLostPoint) /
-                                            (userDataCollect.getTotalPoint)) *
+                                (userDataCollect.getTotalPoint /
+                                        (userDataCollect.getTotalPoint +
+                                            userDataCollect.getLostPoint) *
                                         100)
                                     .toStringAsFixed(2) +
                                 "%",
