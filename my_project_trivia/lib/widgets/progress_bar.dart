@@ -11,12 +11,14 @@ class ProgressBar extends StatefulWidget {
   const ProgressBar({
     Key? key,
   }) : super(key: key);
+
   @override
   State<ProgressBar> createState() => _ProgressBarState();
 }
 
 class _ProgressBarState extends State<ProgressBar> {
   int x = 0;
+
   @override
   // void dispose() {
   //   super.dispose();

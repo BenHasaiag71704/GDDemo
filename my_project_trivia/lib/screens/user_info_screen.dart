@@ -94,13 +94,14 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                       enableSuggestions: false,
                     ),
                     ElevatedButton(
-                        onPressed: () => setState(() {
-                              userDataCollect.setUserName(_controller.text);
-                              //_controller = TextEditingController();
-                              _controller.text =
-                                  userDataCollect.getNickName.toString();
-                            }),
-                        child: Text("Submit")),
+                      onPressed: () => setState(() {
+                        userDataCollect.setUserName(_controller.text);
+                        //_controller = TextEditingController();
+                        _controller.text =
+                            userDataCollect.getNickName.toString();
+                      }),
+                      child: Text("Submit"),
+                    ),
                   ],
                 ),
               ),

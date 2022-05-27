@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 //--
 import 'package:my_project_trivia/providers/questions.dart';
 import 'package:my_project_trivia/providers/user_answers.dart';
+import 'package:my_project_trivia/screens/online_screen.dart';
 import 'package:my_project_trivia/screens/score/score_screen.dart';
 
 import '../providers/user.dart';
@@ -297,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             .length;
 
                         int end = lng - anslng;
-                        if (wantedGame == Prefs.None) {
+                        if (lng == 0) {
                           print("hello");
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -385,6 +386,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           primary: Colors.lightGreenAccent.shade100,
                         ),
                         child: Text("User Page"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OnlineScreen()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(20.0),
+                          ),
+                          primary: Colors.lightGreenAccent.shade100,
+                        ),
+                        child: Text("Go Online!"),
                       ),
                       ElevatedButton(
                         onPressed: () {
