@@ -36,6 +36,9 @@ class __AuthFormState extends State<AuthForm> {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15))),
+        color: (Color(0xffebf0f7)),
         margin: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Padding(
@@ -46,6 +49,7 @@ class __AuthFormState extends State<AuthForm> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   TextFormField(
+                    style: TextStyle(color: Colors.black),
                     key: ValueKey('email'),
                     validator: (value) {
                       if (value == null) {
@@ -58,7 +62,12 @@ class __AuthFormState extends State<AuthForm> {
                     },
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black26)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black26)),
                       labelText: 'Email address',
+                      labelStyle: TextStyle(color: Colors.black),
                     ),
                     onSaved: (value) {
                       _userEmail = value.toString();
@@ -84,6 +93,7 @@ class __AuthFormState extends State<AuthForm> {
                   //   },
                   // ),
                   TextFormField(
+                    style: TextStyle(color: Colors.black),
                     key: ValueKey('password'),
                     validator: (value) {
                       if (value == null) {
@@ -95,7 +105,12 @@ class __AuthFormState extends State<AuthForm> {
                       return null;
                     },
                     decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black26)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black26)),
                       labelText: 'Password',
+                      labelStyle: TextStyle(color: Colors.black),
                     ),
                     obscureText: true,
                     onSaved: (value) {
@@ -110,9 +125,12 @@ class __AuthFormState extends State<AuthForm> {
                     onPressed: _trySubmit,
                   ),
                   TextButton(
-                    child: Text(_isLogin
-                        ? "Create new account"
-                        : "I already have an account"),
+                    child: Text(
+                      _isLogin
+                          ? "Create new account"
+                          : "I already have an account",
+                      style: TextStyle(color: Colors.black),
+                    ),
                     onPressed: () {
                       setState(() {
                         _isLogin = !_isLogin;

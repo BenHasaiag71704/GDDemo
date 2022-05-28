@@ -143,7 +143,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [Colors.blue.shade400, Colors.green.shade200],
+                  colors: [
+                    Color.fromARGB(255, 178, 255, 77),
+                    Color.fromARGB(255, 83, 233, 101),
+                    Color.fromARGB(255, 0, 186, 155),
+                  ],
                 ),
               ),
               child: Column(
@@ -153,10 +157,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 1,
                   ),
                   Text(
-                    "welcome to home screen",
+                    "פסיכו-טריוויה",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 30,
+                        fontSize: 50,
                         fontWeight: FontWeight.bold),
                   ),
                   //Text(answerList[1].ansTime.toString()),
@@ -191,10 +195,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                 print(wantedGame);
                               });
                             },
+                            inactiveThumbColor: Colors.grey[300],
                             activeTrackColor: Colors.lightGreenAccent,
-                            activeColor: Colors.green,
+                            activeColor: Colors.lightBlue[400],
                           ),
-                          Text("בחר מתמטיקה"),
+                          Column(
+                            children: [
+                              Text(
+                                "בחר מתמטיקה",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              Icon(
+                                Icons.pin_rounded,
+                                color: Colors.grey,
+                              )
+                            ],
+                          ),
                         ],
                       ),
                       // hebrew
@@ -220,10 +236,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                 print(wantedGame);
                               });
                             },
+                            inactiveThumbColor: Colors.grey[300],
                             activeTrackColor: Colors.lightGreenAccent,
-                            activeColor: Colors.green,
+                            activeColor: Colors.lightBlue[400],
                           ),
-                          Text("בחר עברית"),
+                          Column(
+                            children: [
+                              Text(
+                                "בחר עברית",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              Icon(
+                                Icons.history_edu,
+                                color: Colors.grey,
+                              )
+                            ],
+                          ),
                         ],
                       ),
                       SizedBox(width: 50),
@@ -253,10 +281,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                               );
                             },
+                            inactiveThumbColor: Colors.grey[300],
                             activeTrackColor: Colors.lightGreenAccent,
-                            activeColor: Colors.green,
+                            activeColor: Colors.lightBlue[400],
                           ),
-                          Text("בחר אנגלית"),
+                          Column(
+                            children: [
+                              Text("בחר אנגלית",
+                                  style: TextStyle(color: Colors.black)),
+                              Icon(
+                                Icons.sort_by_alpha,
+                                color: Colors.grey,
+                              )
+                            ],
+                          ),
                         ],
                       ),
                     ],
@@ -344,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ElevatedButton(
+                      ElevatedButton.icon(
                         onPressed: () {
                           userDataCollect.setHebrewScore(
                               Provider.of<UserAnswers>(context, listen: false)
@@ -385,9 +423,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           primary: Colors.lightGreenAccent.shade100,
                         ),
-                        child: Text("User Page"),
+                        label: Text("User Page"),
+                        icon: Icon(Icons.supervised_user_circle_rounded),
                       ),
-                      ElevatedButton(
+                      ElevatedButton.icon(
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -400,7 +439,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           primary: Colors.lightGreenAccent.shade100,
                         ),
-                        child: Text("Go Online!"),
+                        icon: Icon(Icons.chat),
+                        label: Text("Go Online!"),
                       ),
                       ElevatedButton.icon(
                         icon: Icon(Icons.leaderboard),

@@ -43,7 +43,11 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.blue.shade400, Colors.green.shade200],
+            colors: [
+              Color.fromARGB(255, 178, 255, 77),
+              Color.fromARGB(255, 83, 233, 101),
+              Color.fromARGB(255, 0, 186, 155),
+            ],
           ),
         ),
         child: Column(
@@ -59,17 +63,23 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               child: Text("enter or change nickname"),
             ),
             Card(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 2, horizontal: 170),
+              child: SizedBox(
+                height: 50,
+                width: 400,
                 child: FittedBox(
-                  child: Text(
-                    userDataCollect.getNickName.toString(),
-                    style: TextStyle(fontSize: 18, color: Colors.black),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                    child: FittedBox(
+                      child: Text(
+                        userDataCollect.getNickName.toString(),
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              color: Colors.transparent,
+              color: Colors.green[600],
             ),
             if (_IsOpen)
               Card(
@@ -120,6 +130,8 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
             //       ],
             //     )),
             Card(
+              elevation: 0,
+              margin: EdgeInsets.all(10),
               key: ValueKey("info"),
               color: Colors.transparent,
               //color: Colors.black,
@@ -199,7 +211,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                     ],
                   ),
                   SizedBox(
-                    height: 130,
+                    height: 50,
                   ),
                 ],
               ),

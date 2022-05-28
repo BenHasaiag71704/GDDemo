@@ -24,7 +24,11 @@ class _OnlineScreenState extends State<OnlineScreen> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.blue.shade400, Colors.green.shade200],
+            colors: [
+              Color.fromARGB(255, 178, 255, 77),
+              Color.fromARGB(255, 83, 233, 101),
+              Color.fromARGB(255, 0, 186, 155),
+            ],
           ),
         ),
         child: Column(

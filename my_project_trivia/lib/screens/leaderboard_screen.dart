@@ -18,14 +18,22 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Center(child: Text("leaderboard")),
+        title: Center(
+            child: Text(
+          "leaderboard",
+          style: TextStyle(color: Colors.black, fontSize: 30),
+        )),
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.blue.shade400, Colors.green.shade200],
+            colors: [
+              Color.fromARGB(255, 178, 255, 77),
+              Color.fromARGB(255, 83, 233, 101),
+              Color.fromARGB(255, 0, 186, 155),
+            ],
           ),
         ),
         child: Column(
@@ -52,38 +60,38 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              playerSnapShot[index]['totalPoint'].toString() +
-                                  " - " +
-                                  playerSnapShot[index]['nickname'].toString(),
-                              style: TextStyle(
-                                  fontSize: index == 0
-                                      ? 65
-                                      : index == 1
-                                          ? 55
-                                          : index == 2
-                                              ? 50
-                                              : 40,
-                                  color: index == 0
-                                      ? Colors.yellow
-                                      : index == 1
-                                          ? Colors.grey
-                                          : index == 2
-                                              ? Colors.amber
-                                              : Colors.black),
+                          SizedBox(
+                            height: 100,
+                            width: index == 0
+                                ? 280
+                                : index == 1
+                                    ? 240
+                                    : index == 2
+                                        ? 200
+                                        : 150,
+                            child: FittedBox(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  playerSnapShot[index]['totalPoint']
+                                          .toString() +
+                                      " - " +
+                                      playerSnapShot[index]['nickname']
+                                          .toString(),
+                                  style: TextStyle(
+                                      color: index == 0
+                                          ? Colors.yellow
+                                          : index == 1
+                                              ? Colors.grey
+                                              : index == 2
+                                                  ? Colors.amber
+                                                  : Colors.blue),
+                                ),
+                              ),
                             ),
                           ),
                           Icon(
                             index < 3 ? Icons.emoji_events : null,
-                            size: index == 0
-                                ? 65
-                                : index == 1
-                                    ? 55
-                                    : index == 2
-                                        ? 50
-                                        : null,
                             color: index == 0
                                 ? Colors.yellow
                                 : index == 1
@@ -91,7 +99,11 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                                     : index == 2
                                         ? Colors.amber
                                         : null,
-                          )
+                          ),
+                          Divider(
+                            thickness: 10,
+                            color: Colors.black,
+                          ),
                         ],
                       ),
                     ),
