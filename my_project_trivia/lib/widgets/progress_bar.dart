@@ -20,9 +20,9 @@ class _ProgressBarState extends State<ProgressBar> {
   int x = 0;
 
   @override
-  // void dispose() {
-  //   super.dispose();
-  // }
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

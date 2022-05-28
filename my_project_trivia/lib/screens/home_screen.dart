@@ -402,7 +402,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: Text("Go Online!"),
                       ),
-                      ElevatedButton(
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.leaderboard),
+                        label: Text("leaderboard"),
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -416,7 +418,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           primary: Colors.lightGreenAccent.shade100,
                         ),
-                        child: Text("leaderboard"),
                       ),
                     ],
                   ),
