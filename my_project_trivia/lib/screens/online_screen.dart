@@ -14,10 +14,19 @@ class _OnlineScreenState extends State<OnlineScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text("ברוך הבא לצאט!"),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Colors.blue.shade400, Colors.green.shade200],
+          ),
+        ),
         child: Column(
           children: [
             Expanded(

@@ -1,12 +1,15 @@
 import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble(this.message, this.isMe, {this.key});
+  MessageBubble(this.message, this.isMe, this.userId, {this.key});
 
   final Key? key;
   final String message;
+  final String userId;
+
   final bool isMe;
 
   @override
@@ -16,7 +19,7 @@ class MessageBubble extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: isMe ? Colors.orange : Colors.white,
+            color: isMe ? Colors.green : Colors.blue,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
@@ -33,10 +36,36 @@ class MessageBubble extends StatelessWidget {
             vertical: 4,
             horizontal: 8,
           ),
-          child: Text(
-            message,
-            style: TextStyle(color: isMe ? Colors.purple : Colors.green),
-          ),
+          child: FutureBuilder<DocumentSnapshot>(
+              future: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(userId)
+                  .get(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text("Loading...");
+                }
+                return Column(
+                  crossAxisAlignment:
+                      isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      snapshot.data!['nickname'],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      message,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      textAlign: isMe ? TextAlign.end : TextAlign.start,
+                    ),
+                  ],
+                );
+              }),
         ),
       ],
     );
