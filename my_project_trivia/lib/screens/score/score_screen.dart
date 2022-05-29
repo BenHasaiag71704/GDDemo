@@ -15,26 +15,43 @@ class _ScoreScreenState extends State<ScoreScreen> {
   Widget build(BuildContext context) {
     int temp = Provider.of<Questions>(context).getTotalScore;
     return Scaffold(
-      appBar: AppBar(),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Column(
-            children: [
-              Spacer(flex: 3),
-              Text(
-                "כל הכבוד!",
-                style: TextStyle(fontSize: 30),
-              ),
-              Spacer(),
-              Text(
-                "ענית על כל השאלות במאגר!",
-                style: TextStyle(fontSize: 30),
-              ),
-              Spacer(flex: 3),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color.fromARGB(255, 178, 255, 77),
+              Color.fromARGB(255, 83, 233, 101),
+              Color.fromARGB(255, 0, 186, 155),
             ],
           ),
-        ],
+        ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Column(
+              children: [
+                Spacer(flex: 3),
+                Text(
+                  "!כל הכבוד",
+                  style: TextStyle(fontSize: 30, color: Colors.black),
+                ),
+                Spacer(),
+                Text(
+                  "!ענית על כל השאלות במאגר",
+                  style: TextStyle(fontSize: 30, color: Colors.black),
+                ),
+                Spacer(flex: 3),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

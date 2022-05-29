@@ -375,6 +375,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Text(
                         "start play!",
                         style: TextStyle(fontSize: 35),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
