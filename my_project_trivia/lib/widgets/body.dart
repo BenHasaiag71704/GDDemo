@@ -43,7 +43,7 @@ class _BodyState extends State<Body> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: ProgressBar(),
+                  child: ProgressBar(totalTime: widget.totalQnNum),
                 ),
                 Text.rich(
                   TextSpan(
