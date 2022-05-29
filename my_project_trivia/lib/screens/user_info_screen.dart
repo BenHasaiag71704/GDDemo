@@ -135,85 +135,91 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               key: ValueKey("info"),
               color: Colors.transparent,
               //color: Colors.black,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+              child: FittedBox(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
                     children: [
-                      Text(
-                        "ניקוד כולל" +
-                            " " +
-                            userDataCollect.getTotalPoint.toString(),
-                        style: TextStyle(fontSize: 18, color: Colors.black),
-                      )
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "ניקוד כולל" +
+                                " " +
+                                userDataCollect.getTotalPoint.toString(),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            _NoPoint
+                                ? "אחוז הצלחה : אחוז ההצלחה עוד לא הוגדר"
+                                : "אחוז ההצלחה שלך הוא : " +
+                                    (userDataCollect.getTotalPoint /
+                                            (userDataCollect.getTotalPoint +
+                                                userDataCollect.getLostPoint) *
+                                            100)
+                                        .toStringAsFixed(2) +
+                                    "%",
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "מספר השאלות בסיווג כמותי שענית עליהן נכון" +
+                                " " +
+                                userDataCollect.getMathPoint.toString(),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "מספר השאלות בסיווג מילולי שענית עליהן נכון" +
+                                " " +
+                                userDataCollect.getHebrewPoint.toString(),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "מספר השאלות בסיווג אנגלי שענית עליהן נכון" +
+                                " " +
+                                userDataCollect.getEnglishPoint.toString(),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
                     ],
                   ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        _NoPoint
-                            ? "אחוז הצלחה : אחוז ההצלחה עוד לא הוגדר"
-                            : "אחוז ההצלחה שלך הוא : " +
-                                (userDataCollect.getTotalPoint /
-                                        (userDataCollect.getTotalPoint +
-                                            userDataCollect.getLostPoint) *
-                                        100)
-                                    .toStringAsFixed(2) +
-                                "%",
-                        style: TextStyle(fontSize: 18, color: Colors.black),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "מספר השאלות בסיווג כמותי שענית עליהן נכון" +
-                            " " +
-                            userDataCollect.getMathPoint.toString(),
-                        style: TextStyle(fontSize: 18, color: Colors.black),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "מספר השאלות בסיווג מילולי שענית עליהן נכון" +
-                            " " +
-                            userDataCollect.getHebrewPoint.toString(),
-                        style: TextStyle(fontSize: 18, color: Colors.black),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "מספר השאלות בסיווג אנגלי שענית עליהן נכון" +
-                            " " +
-                            userDataCollect.getEnglishPoint.toString(),
-                        style: TextStyle(fontSize: 18, color: Colors.black),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                ],
+                ),
               ),
             )
           ],

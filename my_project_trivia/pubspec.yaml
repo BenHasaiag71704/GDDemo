@@ -39,6 +39,7 @@ dependencies:
   firebase_auth: ^3.3.4
   provider: ^6.0.2
   get: ^4.1.4
+  #firebase_messaging: ^10.0.3
 
   #websafe_svg: ^1.1.4
 
