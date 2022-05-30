@@ -3,6 +3,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_project_trivia/providers/questions.dart';
+import 'package:my_project_trivia/widgets/toggle_bar.dart';
+import 'package:provider/provider.dart';
 
 class LeaderBoardScreen extends StatefulWidget {
   @override
@@ -10,6 +13,9 @@ class LeaderBoardScreen extends StatefulWidget {
 }
 
 class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
+  int counter = 0;
+  int lng = 20;
+  String theFiltter = 'totalPoint';
   @override
   Widget build(BuildContext context) {
     int plaerCount = 5;
@@ -37,12 +43,58 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            SizedBox(
+              height: 100,
+            ),
+            ToggleBar(
+              labels: ["all", "hebrew", "english", "math"],
+              textColor: Colors.black,
+              selectedTextColor: Colors.black,
+              backgroundColor: Colors.lightGreenAccent,
+              selectedTabColor: Colors.white,
+              onSelectionUpdated: (index) {
+                setState(() {
+                  counter = index;
+                });
+                switch (counter) {
+                  case 0:
+                    setState(() {
+                      theFiltter = 'totalPoint';
+                      lng = Provider.of<Questions>(context, listen: false)
+                          .getTheListLng;
+                    });
+                    break;
+                  case 1:
+                    setState(() {
+                      theFiltter = 'hebrewpoint';
+                      lng = Provider.of<Questions>(context, listen: false)
+                          .getTheHebrewLng;
+                    });
+                    break;
+                  case 2:
+                    setState(() {
+                      theFiltter = 'englishpoint';
+                      lng = Provider.of<Questions>(context, listen: false)
+                          .getTheEnglishLng;
+                    });
+                    break;
+                  case 3:
+                    setState(() {
+                      theFiltter = 'mathpoint';
+                      lng = Provider.of<Questions>(context, listen: false)
+                          .getTheMathLng;
+                    });
+                    break;
+                }
+              },
+            ),
             Expanded(
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('users')
-                    .orderBy('totalPoint', descending: true)
+                    .orderBy('${theFiltter}', descending: true)
                     .snapshots(),
                 builder: (context,
                     AsyncSnapshot<QuerySnapshot> leaderboardSnapShot) {
@@ -60,49 +112,61 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            height: 100,
-                            width: index == 0
-                                ? 280
-                                : index == 1
-                                    ? 240
-                                    : index == 2
-                                        ? 200
-                                        : 150,
-                            child: FittedBox(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  playerSnapShot[index]['totalPoint']
-                                          .toString() +
-                                      " - " +
-                                      playerSnapShot[index]['nickname']
-                                          .toString(),
-                                  style: TextStyle(
-                                      color: index == 0
-                                          ? Colors.yellow
-                                          : index == 1
-                                              ? Colors.grey
-                                              : index == 2
-                                                  ? Colors.amber
-                                                  : Colors.blue),
-                                ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              color: Colors.greenAccent.shade400,
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 100,
+                                    width: 325,
+                                    child: FittedBox(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              (playerSnapShot[index]['nickname']
+                                                      .toString()) +
+                                                  " - " +
+                                                  ((playerSnapShot[index][
+                                                                  '${theFiltter}'] /
+                                                              lng) *
+                                                          100)
+                                                      .toStringAsFixed(2) +
+                                                  "%",
+                                              style: TextStyle(
+                                                  color: index == 0
+                                                      ? Colors.yellow
+                                                      : index == 1
+                                                          ? Colors.grey
+                                                          : index == 2
+                                                              ? Colors.amber
+                                                              : Colors.black),
+                                            ),
+                                            Icon(
+                                              index < 3
+                                                  ? Icons.emoji_events
+                                                  : null,
+                                              color: index == 0
+                                                  ? Colors.yellow
+                                                  : index == 1
+                                                      ? Colors.grey
+                                                      : index == 2
+                                                          ? Colors.amber
+                                                          : null,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                          Icon(
-                            index < 3 ? Icons.emoji_events : null,
-                            color: index == 0
-                                ? Colors.yellow
-                                : index == 1
-                                    ? Colors.grey
-                                    : index == 2
-                                        ? Colors.amber
-                                        : null,
-                          ),
-                          Divider(
-                            thickness: 10,
-                            color: Colors.black,
                           ),
                         ],
                       ),

@@ -211,6 +211,22 @@ class Questions with ChangeNotifier {
     return [..._questionList];
   }
 
+  int get getTheListLng {
+    return _finalQuestionList.length;
+  }
+
+  int get getTheMathLng {
+    return _onlyMathList.length;
+  }
+
+  int get getTheHebrewLng {
+    return _onlyHberewList.length;
+  }
+
+  int get getTheEnglishLng {
+    return _onlyEnglishList.length;
+  }
+
   // List<Question> get getTheFinalList {
   //   return [..._finalQuestionList];
   // }

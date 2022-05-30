@@ -174,6 +174,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       //math
                       Column(
                         children: [
+                          Column(
+                            children: [
+                              Text(
+                                "בחר מתמטיקה",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              Icon(
+                                Icons.pin_rounded,
+                                color: Colors.grey,
+                                size: 75,
+                              ),
+                            ],
+                          ),
                           Switch(
                             value: isMath,
                             onChanged: (value) {
@@ -199,24 +212,25 @@ class _HomeScreenState extends State<HomeScreen> {
                             activeTrackColor: Colors.lightGreenAccent,
                             activeColor: Colors.lightBlue[400],
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                "בחר מתמטיקה",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              Icon(
-                                Icons.pin_rounded,
-                                color: Colors.grey,
-                              )
-                            ],
-                          ),
                         ],
                       ),
                       // hebrew
                       SizedBox(width: 50),
                       Column(
                         children: [
+                          Column(
+                            children: [
+                              Text(
+                                "בחר עברית",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              Icon(
+                                Icons.history_edu,
+                                color: Colors.grey,
+                                size: 75,
+                              )
+                            ],
+                          ),
                           Switch(
                             value: isHebrew,
                             onChanged: (value) {
@@ -240,24 +254,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             activeTrackColor: Colors.lightGreenAccent,
                             activeColor: Colors.lightBlue[400],
                           ),
-                          Column(
-                            children: [
-                              Text(
-                                "בחר עברית",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              Icon(
-                                Icons.history_edu,
-                                color: Colors.grey,
-                              )
-                            ],
-                          ),
                         ],
                       ),
                       SizedBox(width: 50),
                       // english
                       Column(
                         children: [
+                          Column(
+                            children: [
+                              Text("בחר אנגלית",
+                                  style: TextStyle(color: Colors.black)),
+                              Icon(
+                                Icons.sort_by_alpha,
+                                color: Colors.grey,
+                                size: 75,
+                              )
+                            ],
+                          ),
                           Switch(
                             value: isEnglish,
                             onChanged: (value) {
@@ -284,16 +297,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             inactiveThumbColor: Colors.grey[300],
                             activeTrackColor: Colors.lightGreenAccent,
                             activeColor: Colors.lightBlue[400],
-                          ),
-                          Column(
-                            children: [
-                              Text("בחר אנגלית",
-                                  style: TextStyle(color: Colors.black)),
-                              Icon(
-                                Icons.sort_by_alpha,
-                                color: Colors.grey,
-                              )
-                            ],
                           ),
                         ],
                       ),
@@ -380,87 +383,92 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          userDataCollect.setHebrewScore(
-                              Provider.of<UserAnswers>(context, listen: false)
-                                  .getHebrewScore(Provider.of<AppUser>(context,
-                                          listen: false)
-                                      .uid!));
+                  FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            userDataCollect.setHebrewScore(
+                                Provider.of<UserAnswers>(context, listen: false)
+                                    .getHebrewScore(Provider.of<AppUser>(
+                                            context,
+                                            listen: false)
+                                        .uid!));
 
-                          userDataCollect.setEnglishScore(
-                              Provider.of<UserAnswers>(context, listen: false)
-                                  .getEnglishScore(Provider.of<AppUser>(context,
-                                          listen: false)
-                                      .uid!));
+                            userDataCollect.setEnglishScore(
+                                Provider.of<UserAnswers>(context, listen: false)
+                                    .getEnglishScore(Provider.of<AppUser>(
+                                            context,
+                                            listen: false)
+                                        .uid!));
 
-                          userDataCollect.setMathScore(
-                              Provider.of<UserAnswers>(context, listen: false)
-                                  .getMathScore(Provider.of<AppUser>(context,
-                                          listen: false)
-                                      .uid!));
+                            userDataCollect.setMathScore(
+                                Provider.of<UserAnswers>(context, listen: false)
+                                    .getMathScore(Provider.of<AppUser>(context,
+                                            listen: false)
+                                        .uid!));
 
-                          userDataCollect.addTotalScore(
-                              userDataCollect.englishpoint,
-                              userDataCollect.hebrewpoint,
-                              userDataCollect.mathpoint);
+                            userDataCollect.addTotalScore(
+                                userDataCollect.englishpoint,
+                                userDataCollect.hebrewpoint,
+                                userDataCollect.mathpoint);
 
-                          userDataCollect.setLostPoint(
-                              userDataCollect.totalPoint,
-                              Provider.of<UserAnswers>(context, listen: false)
-                                  .getSingleUserQnAnswerd(userDataCollect.uid));
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (ctx) => UserInfoScreen(),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(20.0),
-                          ),
-                          primary: Colors.lightGreenAccent.shade100,
-                        ),
-                        label: Text("User Page"),
-                        icon: Icon(Icons.supervised_user_circle_rounded),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
+                            userDataCollect.setLostPoint(
+                                userDataCollect.totalPoint,
+                                Provider.of<UserAnswers>(context, listen: false)
+                                    .getSingleUserQnAnswerd(
+                                        userDataCollect.uid));
+                            Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => OnlineScreen()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(20.0),
-                          ),
-                          primary: Colors.lightGreenAccent.shade100,
-                        ),
-                        icon: Icon(Icons.chat),
-                        label: Text("Go Online!"),
-                      ),
-                      ElevatedButton.icon(
-                        icon: Icon(Icons.leaderboard),
-                        label: Text("leaderboard"),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (ctx) => LeaderBoardScreen(),
+                                builder: (ctx) => UserInfoScreen(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0),
                             ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(20.0),
+                            primary: Colors.lightGreenAccent.shade100,
                           ),
-                          primary: Colors.lightGreenAccent.shade100,
+                          label: Text("User Page"),
+                          icon: Icon(Icons.supervised_user_circle_rounded),
                         ),
-                      ),
-                    ],
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => OnlineScreen()));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0),
+                            ),
+                            primary: Colors.lightGreenAccent.shade100,
+                          ),
+                          icon: Icon(Icons.support_agent),
+                          label: Text("Report a bug!"),
+                        ),
+                        ElevatedButton.icon(
+                          icon: Icon(Icons.leaderboard),
+                          label: Text("leaderboard"),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (ctx) => LeaderBoardScreen(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0),
+                            ),
+                            primary: Colors.lightGreenAccent.shade100,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
