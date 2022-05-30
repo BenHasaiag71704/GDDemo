@@ -211,6 +211,7 @@ class Questions with ChangeNotifier {
     return [..._questionList];
   }
 
+////
   int get getTheListLng {
     return _finalQuestionList.length;
   }
@@ -226,6 +227,7 @@ class Questions with ChangeNotifier {
   int get getTheEnglishLng {
     return _onlyEnglishList.length;
   }
+////
 
   // List<Question> get getTheFinalList {
   //   return [..._finalQuestionList];

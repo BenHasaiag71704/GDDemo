@@ -82,9 +82,16 @@ class _ProgressBarState extends State<ProgressBar> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 children: [
-                  Text(_start == 1201
-                      ? "Time ended!"
-                      : "${totalsec - (_start)}"),
+                  Text(
+                    _start == totalsec + 1
+                        ? "Time ended!"
+                        : ((totalsec - (_start)) % 60) > 9
+                            ? "${((totalsec - (_start)) / 60).floor()}" +
+                                ":${((totalsec - (_start)) % 60)}"
+                            : "${((totalsec - (_start)) / 60).floor()}" +
+                                ":0${((totalsec - (_start)) % 60)}",
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ],
               ),
             ),
