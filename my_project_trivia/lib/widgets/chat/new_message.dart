@@ -9,7 +9,6 @@ class NewMessage extends StatefulWidget {
 
 class _NewMessageState extends State<NewMessage> {
   var _enteredMessage = '';
-
   final _controller = new TextEditingController();
 
   void _sendMessage() {

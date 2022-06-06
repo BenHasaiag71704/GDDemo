@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 import 'package:my_project_trivia/providers/user.dart';
 import 'package:my_project_trivia/providers/user_answers.dart';
 import 'package:my_project_trivia/widgets/progress_bar.dart';

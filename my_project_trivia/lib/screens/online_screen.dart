@@ -1,5 +1,7 @@
 //import 'dart:html';
 
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_project_trivia/widgets/chat/messages.dart';
@@ -11,6 +13,31 @@ class OnlineScreen extends StatefulWidget {
 }
 
 class _OnlineScreenState extends State<OnlineScreen> {
+  // int _start = 0;
+  // late Timer _timer;
+
+  // void startTimer(int totalsc) {
+  //   const oneSec = const Duration(seconds: 1);
+  //   _timer = new Timer.periodic(
+  //     oneSec,
+  //     (Timer timer) => setState(
+  //       () {
+  //         if (_start > totalsc) {
+  //           timer.cancel();
+  //         } else {
+  //           _start = _start + 1;
+  //         }
+  //       },
+  //     ),
+  //   );
+  // }
+
+  // @override
+  // void dispose() {
+  //   _timer.cancel();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,3 +78,9 @@ class _OnlineScreenState extends State<OnlineScreen> {
 //           );
 //         },
 //       ),
+
+
+  // int _start = 0;
+  // bool didcg = false;
+
+

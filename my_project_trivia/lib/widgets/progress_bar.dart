@@ -5,7 +5,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 import 'package:my_project_trivia/providers/questions.dart';
 import 'package:provider/provider.dart';
 

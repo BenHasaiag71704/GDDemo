@@ -18,12 +18,10 @@ class AppUser with ChangeNotifier {
   void sumbitAuthForm(
     String email,
     String password,
-    // String username,
     bool isLogin,
     BuildContext ctx,
   ) async {
     UserCredential authResult;
-
     try {
       final userDataCollect = Provider.of<AppUser>(ctx, listen: false);
       if (isLogin) {
@@ -44,14 +42,12 @@ class AppUser with ChangeNotifier {
           englishpoint = snapshot.data()!['englishpoint'];
           lostpoint = snapshot.data()!['lostpoint'];
         });
-        // userDataCollect.setUserName(newname);
       } else {
         authResult = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
         userDataCollect.setUid(authResult.user!.uid);
-        //userDataCollect.setUserName(username);
         FirebaseFirestore.instance
             .collection('users')
             .doc(authResult.user!.uid)

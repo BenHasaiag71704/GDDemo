@@ -3,7 +3,7 @@ import 'dart:io';
 //import 'dart:js';
 
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
+//אimport 'package:get/get.dart';
 import 'package:my_project_trivia/models/question.dart';
 import 'package:my_project_trivia/models/user_question_answer.dart';
 import 'package:my_project_trivia/providers/user.dart';
@@ -22,25 +22,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 class Questions with ChangeNotifier {
   late List<Question> _questionList = [];
   late List<Question> _finalQuestionList = [];
-
   late List<Question> _onlyMathList = [];
   late List<Question> _onlyHberewList = [];
   late List<Question> _onlyEnglishList = [];
+  int _currentQuestionNum = 1;
+  bool _isClicked = false;
+  int _totlScore = 0;
+  bool timerResert = false;
+  String? _currentQuestionId = "";
 
+  //String? _currentQuestionId = "0Z8QH7x5eHWz0fgocpeh";
   // bool _isAnswered = false;
   // late int _correctAns;
   // late int _selectedAns;
   // int _numOfCorrectAns = 0;
   // int _questionNumber = 0;
-  int _currentQuestionNum = 1;
-  bool _isClicked = false;
-  int _totlScore = 0;
+  //String? _currentQuestionId = "";
 
-  bool timerResert = false;
-
-  //String? _currentQuestionId = "0Z8QH7x5eHWz0fgocpeh";
-  String? _currentQuestionId = "";
-
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - לשאוב את מאגר השאלות ממסד הנתונים
   Future<void> fetchQuestions() async {
     if (_questionList.isEmpty && _onlyMathList.isEmpty) {
       try {
@@ -64,12 +65,18 @@ class Questions with ChangeNotifier {
     } else {}
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - החזרת משתנה מסוג מחרוזת
+  // מטרת הפעולה - פעולה המחזירה את סוג השאלה
   String getType() {
     Question q = _finalQuestionList
         .firstWhere((element) => (element.id == _currentQuestionId));
     return q.type;
   }
 
+  // טענת כניסה -  אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - מילוי שלושת הרשימות המכילות שאלות מסוג משתנה אחד בעת פתיחת האפליקציה
   void setAlltheOneTypeLists() {
     if (_onlyMathList.isEmpty &&
         _onlyEnglishList.isEmpty &&
@@ -88,6 +95,9 @@ class Questions with ChangeNotifier {
     }
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - להחזיר את שאלות האנגלית לרשימה הראשית עליה אנו עובדים
   void getBackEnglish() {
     if (_questionList.isEmpty == false) {
       _finalQuestionList.forEach((element) {
@@ -103,6 +113,9 @@ class Questions with ChangeNotifier {
     print(_questionList.length);
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - להחזיר את שאלות העברית לרשימה הראשית עליה אנו עובדים
   void getBackHebrew() {
     if (_questionList.isEmpty == false) {
       _finalQuestionList.forEach((element) {
@@ -118,6 +131,9 @@ class Questions with ChangeNotifier {
     print(_questionList.length);
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - להחזיר את שאלות מתמטיקה לרשימה הראשית עליה אנו עובדים
   void getBackMath() {
     if (_questionList.isEmpty == false) {
       _finalQuestionList.forEach((element) {
@@ -133,6 +149,9 @@ class Questions with ChangeNotifier {
     print(_questionList.length);
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - להוציא את שאלות המתמטיקה מהרשימה הראשית עליה אנו עובדים
   void cleanMath() {
     List<Question> temp = [];
     _questionList.forEach((element) {
@@ -145,6 +164,9 @@ class Questions with ChangeNotifier {
     print(_questionList.length);
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - להוציא את שאלות העברית מהרשימה הראשית עליה אנו עובדים
   void cleanHebrew() {
     List<Question> temp = [];
     _questionList.forEach((element) {
@@ -157,6 +179,9 @@ class Questions with ChangeNotifier {
     print(_questionList.length);
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - להוציא את שאלות האנגלית מהרשימה הראשית עליה אנו עובדים
   void cleanEnglish() {
     List<Question> temp = [];
     _questionList.forEach((element) {
@@ -169,11 +194,17 @@ class Questions with ChangeNotifier {
     print(_questionList.length);
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - לאפס את המשתנה השומר את מספר השאלה הנוכחי
   void resetQnNum() {
     _currentQuestionNum = 1;
     notifyListeners();
   }
 
+  // טענת כניסה - משתנה מסוג buildContext
+  // טענת יציאה - אין
+  // מטרת הפעולה - להחזיר את מחרוזת הזיהוי של השאלה
   void getFirstId(BuildContext ctx) {
     Question q = _questionList.firstWhere(
       (element) {
@@ -185,33 +216,39 @@ class Questions with ChangeNotifier {
     _currentQuestionId = q.id;
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - ניקוי הרשימה
   void cleanQn() {
     _questionList = [];
     notifyListeners();
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - עדכון המשתנה השומר את התוצאה
   void updateScore() {
     _totlScore = _totlScore + 1;
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - משתנה מסוג מספר
+  // מטרת הפעולה - החזרת הניקוד הכולל
   int get getTotalScore {
     return _totlScore;
   }
 
-  void willBeDeletedSoon() async {
-    await FirebaseFirestore.instance.collection('questions').add({
-      "answer": 1,
-      "question": "str",
-      "type": "str",
-      "options": ["0", "1", "2", "3"]
-    });
-  }
-
+  // טענת כניסה - אין
+  // טענת יציאה - הפעולה מחזירה רשימה של שאלות
+  // מטרת הפעולה - להחזיר עותק של רשימת השאלות
   List<Question> get getTheList {
     return [..._questionList];
   }
 
-////
+  //  לכל ה4 הבאים :
+  // טענת כניסה - אין
+  // טענת יציאה - הפעולה מחזירה משתנה מסוג מספר שלם
+  // מטרת הפעולה - להחזיר את אורך המערכים
   int get getTheListLng {
     return _finalQuestionList.length;
   }
@@ -233,16 +270,25 @@ class Questions with ChangeNotifier {
   //   return [..._finalQuestionList];
   // }
 
+  // טענת כניסה - אין
+  // טענת יציאה - הפעולה מחזירה משתנה בוליאני
+  // מטרת הפעולה - לבדוק האם הלחיצה התבצעה (בזמן המשחק)
   bool get isClicked {
     return _isClicked;
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - להפוך את המשתנה (מנכון לשגוי ולהפך)
   Future<void> switchBack() async {
     Future.delayed(Duration(milliseconds: 500), () {
       _isClicked = !_isClicked;
     });
   }
 
+  // טענת כניסה - משתנה מסוג BuildContext
+  // טענת יציאה - אין
+  // מטרת הפעולה - לאפס בחזרה את הלחיצה
   void switchClick(ctx) {
     _isClicked = !_isClicked;
     Future.delayed(Duration(milliseconds: 500), () {
@@ -299,8 +345,6 @@ class Questions with ChangeNotifier {
   }
 }
 
-
-
 //   void getNextQuestion(BuildContext ctx) {
 //     Question q = _questionList.firstWhere(
 //       (element) {
@@ -314,63 +358,61 @@ class Questions with ChangeNotifier {
 //   }
 // }
 
+// bool get isAnswered => this._isAnswered;
 
+// int get correctAns => this._correctAns;
 
-  // bool get isAnswered => this._isAnswered;
+// int get selectedAns => this._selectedAns;
 
-  // int get correctAns => this._correctAns;
+// int get questionNumber => this._questionNumber;
 
-  // int get selectedAns => this._selectedAns;
+// int get numOfCorrectAns => this._numOfCorrectAns;
 
-  // int get questionNumber => this._questionNumber;
-
-  // int get numOfCorrectAns => this._numOfCorrectAns;
-
-  // Question? getItem(int position) {
-  //   if (position > _questionList.length)
-  //     return null;
-  //   else
-  //     return _questionList[position];
-  // }
+// Question? getItem(int position) {
+//   if (position > _questionList.length)
+//     return null;
+//   else
+//     return _questionList[position];
+// }
 // void endGame() {
-  //   _questionNumber = 1;
-  //   _selectedAns = 0;
-  //   _isAnswered = false;
-  //   _numOfCorrectAns = 0;
-  // }
-  // String? nextQuestion() {
-  //   if (_questionNumber != _questionList.length) {
-  //     _isAnswered = false;
-  //   } else {
-  //     return "Done";
-  //   }
-  // }
+//   _questionNumber = 1;
+//   _selectedAns = 0;
+//   _isAnswered = false;
+//   _numOfCorrectAns = 0;
+// }
+// String? nextQuestion() {
+//   if (_questionNumber != _questionList.length) {
+//     _isAnswered = false;
+//   } else {
+//     return "Done";
+//   }
+// }
 
-  // Future<bool> checkAns(int selectedIndex) {
-  //   Question q = _questionList.firstWhere((element) =>
-  //       element.id == _currentQuestionId && element.answer == selectedIndex);
+// Future<bool> checkAns(int selectedIndex) {
+//   Question q = _questionList.firstWhere((element) =>
+//       element.id == _currentQuestionId && element.answer == selectedIndex);
 
-  //    if (q.answer == selectedIndex) {
-  //      _numOfCorrectAns++;
-  //    }
+//    if (q.answer == selectedIndex) {
+//      _numOfCorrectAns++;
+//    }
 
-  //   return Future.delayed(
-  //     Duration(seconds: 1),
-  //     () {
-  //       String? temp = nextQuestion();
-  //       if (temp == "Done") {
-  //         return true;
-  //       } else {
-  //         return false;
-  //       }
-  //     },
-  //   );
-  // }
+//   return Future.delayed(
+//     Duration(seconds: 1),
+//     () {
+//       String? temp = nextQuestion();
+//       if (temp == "Done") {
+//         return true;
+//       } else {
+//         return false;
+//       }
+//     },
+//   );
+// }
 
-    // int i = _finalQuestionList.length;
-    // int x = 0;
-    // while (x < i - 1) {
-    //   if (_finalQuestionList[x].type == "math") {
-    //     _questionList.add(_finalQuestionList[x]);
-    //   }
-    // }
+// int i = _finalQuestionList.length;
+// int x = 0;
+// while (x < i - 1) {
+//   if (_finalQuestionList[x].type == "math") {
+//     _questionList.add(_finalQuestionList[x]);
+//   }
+// }

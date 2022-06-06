@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 import 'package:my_project_trivia/providers/questions.dart';
 import 'package:my_project_trivia/providers/user.dart';
 import 'package:my_project_trivia/providers/user_answers.dart';

@@ -11,7 +11,6 @@ class UserInfoScreen extends StatefulWidget {
 class _UserInfoScreenState extends State<UserInfoScreen> {
   TextEditingController _controller = TextEditingController();
   FocusNode UserFocus = FocusNode();
-  //bool _IsNickNameOpen = true;
   bool _NoPoint = true;
   bool _IsOpen = true;
   @override
