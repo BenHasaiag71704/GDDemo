@@ -20,6 +20,9 @@ class __AuthFormState extends State<AuthForm> {
   // String _userName = '';
   String _userPassword = '';
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - לוודא שהפוקוס נכון (שאם יש/אין טקסט מוקלד זה יראה בהתאם במסך ההתחברות)
   void _trySubmit() {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();

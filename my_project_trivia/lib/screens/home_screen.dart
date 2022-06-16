@@ -39,6 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isMath = true;
 
   @override
+
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - לוודא שמסך הבית אינו מוצג עד שכל המידע סיים להגיע ממס הנתונים
   void didChangeDependencies() {
     setState(() {
       _isLoading = true;
@@ -65,6 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
   //   super.initState();
   // }
 
+  // טענת כניסה - 3 משתנים בוליאנים
+  // טענת יציאה - משתנה מיוחד מסוג אי-נאמ
+  // מטרת הפעולה - יצירת אי-נאמ אשר משתמש לאחסון 3 משתנים בוליאנים במשתנה אחד
   static Prefs updateEnum(isHebrew, isEnglish, isMath) {
     if (isHebrew == true && isEnglish == true && isMath == true) {
       return Prefs.All;
@@ -182,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Icon(
                                 Icons.pin_rounded,
-                                color: Colors.grey,
+                                color: Colors.orange[700],
                                 size: 75,
                               ),
                             ],
@@ -197,11 +204,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 print(isMath);
                                 if (isMath == false) {
                                   Provider.of<Questions>(context, listen: false)
-                                      .cleanMath();
+                                      .cleanAllTypeQn("math");
                                 }
                                 if (isMath == true) {
                                   Provider.of<Questions>(context, listen: false)
-                                      .getBackMath();
+                                      .getBackQn("math");
                                 }
                                 wantedGame =
                                     updateEnum(isHebrew, isEnglish, isMath);
@@ -226,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Icon(
                                 Icons.history_edu,
-                                color: Colors.grey,
+                                color: Colors.cyan[700],
                                 size: 75,
                               )
                             ],
@@ -239,11 +246,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 print(isHebrew);
                                 if (isHebrew == false) {
                                   Provider.of<Questions>(context, listen: false)
-                                      .cleanHebrew();
+                                      .cleanAllTypeQn("hebrew");
                                 }
                                 if (isHebrew == true) {
                                   Provider.of<Questions>(context, listen: false)
-                                      .getBackHebrew();
+                                      .getBackQn("hebrew");
                                 }
                                 wantedGame =
                                     updateEnum(isHebrew, isEnglish, isMath);
@@ -266,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: TextStyle(color: Colors.black)),
                               Icon(
                                 Icons.sort_by_alpha,
-                                color: Colors.grey,
+                                color: Colors.purple[700],
                                 size: 75,
                               )
                             ],
@@ -281,12 +288,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   if (isEnglish == false) {
                                     Provider.of<Questions>(context,
                                             listen: false)
-                                        .cleanEnglish();
+                                        .cleanAllTypeQn("english");
                                   }
                                   if (isEnglish == true) {
                                     Provider.of<Questions>(context,
                                             listen: false)
-                                        .getBackEnglish();
+                                        .getBackQn("english");
                                     wantedGame =
                                         updateEnum(isHebrew, isEnglish, isMath);
                                     print(wantedGame);
@@ -391,23 +398,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           onPressed: () {
                             userDataCollect.setHebrewScore(
                                 Provider.of<UserAnswers>(context, listen: false)
-                                    .getHebrewScore(Provider.of<AppUser>(
-                                            context,
-                                            listen: false)
-                                        .uid!));
+                                    .getStypeScore(
+                                        Provider.of<AppUser>(context,
+                                                listen: false)
+                                            .uid!,
+                                        "hebrew"));
 
                             userDataCollect.setEnglishScore(
                                 Provider.of<UserAnswers>(context, listen: false)
-                                    .getEnglishScore(Provider.of<AppUser>(
-                                            context,
-                                            listen: false)
-                                        .uid!));
+                                    .getStypeScore(
+                                        Provider.of<AppUser>(context,
+                                                listen: false)
+                                            .uid!,
+                                        "english"));
 
                             userDataCollect.setMathScore(
                                 Provider.of<UserAnswers>(context, listen: false)
-                                    .getMathScore(Provider.of<AppUser>(context,
-                                            listen: false)
-                                        .uid!));
+                                    .getStypeScore(
+                                        Provider.of<AppUser>(context,
+                                                listen: false)
+                                            .uid!,
+                                        "math"));
 
                             userDataCollect.addTotalScore(
                                 userDataCollect.englishpoint,

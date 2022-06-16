@@ -95,67 +95,90 @@ class Questions with ChangeNotifier {
     }
   }
 
-  // טענת כניסה - אין
-  // טענת יציאה - אין
-  // מטרת הפעולה - להחזיר את שאלות האנגלית לרשימה הראשית עליה אנו עובדים
-  void getBackEnglish() {
+  void getBackQn(String str) {
     if (_questionList.isEmpty == false) {
       _finalQuestionList.forEach((element) {
-        if (element.type == "english") {
+        if (element.type == str) {
           _questionList.add(element);
         }
       });
     } else {
-      _questionList = _onlyEnglishList;
+      if (str == "math") {
+        _questionList = _onlyMathList;
+      }
+      if (str == "hebrew") {
+        _questionList = _onlyHberewList;
+      }
+      if (str == "english") {
+        _questionList = _onlyEnglishList;
+      }
     }
-
     notifyListeners();
     print(_questionList.length);
   }
 
-  // טענת כניסה - אין
-  // טענת יציאה - אין
-  // מטרת הפעולה - להחזיר את שאלות העברית לרשימה הראשית עליה אנו עובדים
-  void getBackHebrew() {
-    if (_questionList.isEmpty == false) {
-      _finalQuestionList.forEach((element) {
-        if (element.type == "hebrew") {
-          _questionList.add(element);
-        }
-      });
-    } else {
-      _questionList = _onlyHberewList;
-    }
+  // // טענת כניסה - אין
+  // // טענת יציאה - אין
+  // // מטרת הפעולה - להחזיר את שאלות האנגלית לרשימה הראשית עליה אנו עובדים
+  // void getBackEnglish() {
+  //   if (_questionList.isEmpty == false) {
+  //     _finalQuestionList.forEach((element) {
+  //       if (element.type == "english") {
+  //         _questionList.add(element);
+  //       }
+  //     });
+  //   } else {
+  //     _questionList = _onlyEnglishList;
+  //   }
 
-    notifyListeners();
-    print(_questionList.length);
-  }
+  //   notifyListeners();
+  //   print(_questionList.length);
+  // }
 
-  // טענת כניסה - אין
-  // טענת יציאה - אין
-  // מטרת הפעולה - להחזיר את שאלות מתמטיקה לרשימה הראשית עליה אנו עובדים
-  void getBackMath() {
-    if (_questionList.isEmpty == false) {
-      _finalQuestionList.forEach((element) {
-        if (element.type == "math") {
-          _questionList.add(element);
-        }
-      });
-    } else {
-      _questionList = _onlyMathList;
-    }
+  // // טענת כניסה - אין
+  // // טענת יציאה - אין
+  // // מטרת הפעולה - להחזיר את שאלות העברית לרשימה הראשית עליה אנו עובדים
+  // void getBackHebrew() {
+  //   if (_questionList.isEmpty == false) {
+  //     _finalQuestionList.forEach((element) {
+  //       if (element.type == "hebrew") {
+  //         _questionList.add(element);
+  //       }
+  //     });
+  //   } else {
+  //     _questionList = _onlyHberewList;
+  //   }
 
-    notifyListeners();
-    print(_questionList.length);
-  }
+  //   notifyListeners();
+  //   print(_questionList.length);
+  // }
+
+  // // טענת כניסה - אין
+  // // טענת יציאה - אין
+  // // מטרת הפעולה - להחזיר את שאלות מתמטיקה לרשימה הראשית עליה אנו עובדים
+  // void getBackMath() {
+  //   if (_questionList.isEmpty == false) {
+  //     _finalQuestionList.forEach((element) {
+  //       if (element.type == "math") {
+  //         _questionList.add(element);
+  //       }
+  //     });
+  //   } else {
+  //     _questionList = _onlyMathList;
+  //   }
+
+  //   notifyListeners();
+  //   print(_questionList.length);
+  // }
 
   // טענת כניסה - אין
   // טענת יציאה - אין
   // מטרת הפעולה - להוציא את שאלות המתמטיקה מהרשימה הראשית עליה אנו עובדים
-  void cleanMath() {
+
+  void cleanAllTypeQn(String str) {
     List<Question> temp = [];
     _questionList.forEach((element) {
-      if (element.type != "math") {
+      if (element.type != str) {
         temp.add(element);
       }
     });
@@ -164,35 +187,47 @@ class Questions with ChangeNotifier {
     print(_questionList.length);
   }
 
-  // טענת כניסה - אין
-  // טענת יציאה - אין
-  // מטרת הפעולה - להוציא את שאלות העברית מהרשימה הראשית עליה אנו עובדים
-  void cleanHebrew() {
-    List<Question> temp = [];
-    _questionList.forEach((element) {
-      if (element.type != "hebrew") {
-        temp.add(element);
-      }
-    });
-    _questionList = temp;
-    notifyListeners();
-    print(_questionList.length);
-  }
+  // void cleanMath() {
+  //   List<Question> temp = [];
+  //   _questionList.forEach((element) {
+  //     if (element.type != "math") {
+  //       temp.add(element);
+  //     }
+  //   });
+  //   _questionList = temp;
+  //   notifyListeners();
+  //   print(_questionList.length);
+  // }
 
-  // טענת כניסה - אין
-  // טענת יציאה - אין
-  // מטרת הפעולה - להוציא את שאלות האנגלית מהרשימה הראשית עליה אנו עובדים
-  void cleanEnglish() {
-    List<Question> temp = [];
-    _questionList.forEach((element) {
-      if (element.type != "english") {
-        temp.add(element);
-      }
-    });
-    _questionList = temp;
-    notifyListeners();
-    print(_questionList.length);
-  }
+  // // טענת כניסה - אין
+  // // טענת יציאה - אין
+  // // מטרת הפעולה - להוציא את שאלות העברית מהרשימה הראשית עליה אנו עובדים
+  // void cleanHebrew() {
+  //   List<Question> temp = [];
+  //   _questionList.forEach((element) {
+  //     if (element.type != "hebrew") {
+  //       temp.add(element);
+  //     }
+  //   });
+  //   _questionList = temp;
+  //   notifyListeners();
+  //   print(_questionList.length);
+  // }
+
+  // // טענת כניסה - אין
+  // // טענת יציאה - אין
+  // // מטרת הפעולה - להוציא את שאלות האנגלית מהרשימה הראשית עליה אנו עובדים
+  // void cleanEnglish() {
+  //   List<Question> temp = [];
+  //   _questionList.forEach((element) {
+  //     if (element.type != "english") {
+  //       temp.add(element);
+  //     }
+  //   });
+  //   _questionList = temp;
+  //   notifyListeners();
+  //   print(_questionList.length);
+  // }
 
   // טענת כניסה - אין
   // טענת יציאה - אין
@@ -279,7 +314,7 @@ class Questions with ChangeNotifier {
 
   // טענת כניסה - אין
   // טענת יציאה - אין
-  // מטרת הפעולה - להפוך את המשתנה (מנכון לשגוי ולהפך)
+  // מטרת הפעולה - להפוך את המשתנה בעת לחיצה (מנכון לשגוי ולהפך)
   Future<void> switchBack() async {
     Future.delayed(Duration(milliseconds: 500), () {
       _isClicked = !_isClicked;
@@ -288,7 +323,7 @@ class Questions with ChangeNotifier {
 
   // טענת כניסה - משתנה מסוג BuildContext
   // טענת יציאה - אין
-  // מטרת הפעולה - לאפס בחזרה את הלחיצה
+  // מטרת הפעולה - להפוך את המשתנה בעת לחיצה + להעביר לשאלה הבאה
   void switchClick(ctx) {
     _isClicked = !_isClicked;
     Future.delayed(Duration(milliseconds: 500), () {
@@ -297,16 +332,25 @@ class Questions with ChangeNotifier {
     notifyListeners();
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - משתנה מסוג מספר שלם
+  // מטרת הפעולה - להחזיר את מספר השאלה הנוכחי
   int get getQnNum {
     return _currentQuestionNum;
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - משתנה מסוג שאלה
+  // מטרת הפעולה - להחזיר את  השאלה הנוכחית
   Question getCurrentQuestion() {
     Question q =
         _questionList.firstWhere((element) => element.id == _currentQuestionId);
     return q;
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - משתנה מסוג מחרוזת
+  // מטרת הפעולה - להחזיר את  המחרוזת המזהה של השאלה הנוכחית
   String? getCurrentId() {
     return _currentQuestionId;
   }
@@ -318,6 +362,9 @@ class Questions with ChangeNotifier {
   //   }
   // }
 
+  // טענת כניסה - משתנה מסוג מספר + buildContext
+  // טענת יציאה - אין
+  // מטרת הפעולה - לעבור למסך הסיום
   void endGame(BuildContext ctx, int Num) {
     if (Num == 0) {
       Navigator.pushReplacement(
@@ -325,11 +372,17 @@ class Questions with ChangeNotifier {
     }
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - לאפס את הטיימר לשגוי
   void startTimerAgain() {
     timerResert = false;
     //notifyListeners();
   }
 
+  // טענת כניסה - משתנה מסוג buildContext
+  // טענת יציאה - אין
+  // מטרת הפעולה - לעבור אל השאלה הבאה
   void getNextQuestion(BuildContext ctx) {
     timerResert = true;
     Question q = _questionList.firstWhere(
@@ -344,75 +397,3 @@ class Questions with ChangeNotifier {
     notifyListeners();
   }
 }
-
-//   void getNextQuestion(BuildContext ctx) {
-//     Question q = _questionList.firstWhere(
-//       (element) {
-//         return Provider.of<UserAnswers>(ctx, listen: false)
-//                 .isExistCheck(_currentQuestionId!) ==
-//             false;
-//       },
-//     );
-//     _currentQuestionId = q.id;
-//     notifyListeners();
-//   }
-// }
-
-// bool get isAnswered => this._isAnswered;
-
-// int get correctAns => this._correctAns;
-
-// int get selectedAns => this._selectedAns;
-
-// int get questionNumber => this._questionNumber;
-
-// int get numOfCorrectAns => this._numOfCorrectAns;
-
-// Question? getItem(int position) {
-//   if (position > _questionList.length)
-//     return null;
-//   else
-//     return _questionList[position];
-// }
-// void endGame() {
-//   _questionNumber = 1;
-//   _selectedAns = 0;
-//   _isAnswered = false;
-//   _numOfCorrectAns = 0;
-// }
-// String? nextQuestion() {
-//   if (_questionNumber != _questionList.length) {
-//     _isAnswered = false;
-//   } else {
-//     return "Done";
-//   }
-// }
-
-// Future<bool> checkAns(int selectedIndex) {
-//   Question q = _questionList.firstWhere((element) =>
-//       element.id == _currentQuestionId && element.answer == selectedIndex);
-
-//    if (q.answer == selectedIndex) {
-//      _numOfCorrectAns++;
-//    }
-
-//   return Future.delayed(
-//     Duration(seconds: 1),
-//     () {
-//       String? temp = nextQuestion();
-//       if (temp == "Done") {
-//         return true;
-//       } else {
-//         return false;
-//       }
-//     },
-//   );
-// }
-
-// int i = _finalQuestionList.length;
-// int x = 0;
-// while (x < i - 1) {
-//   if (_finalQuestionList[x].type == "math") {
-//     _questionList.add(_finalQuestionList[x]);
-//   }
-// }

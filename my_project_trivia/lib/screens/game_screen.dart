@@ -24,35 +24,35 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  static bool checkmath(Prefs temp) {
-    if (temp == Prefs.All ||
-        temp == Prefs.MathAndHebrew ||
-        temp == Prefs.MatnAndEnglish ||
-        temp == Prefs.OnlyMath) {
-      return true;
-    }
-    return false;
-  }
+  // static bool checkmath(Prefs temp) {
+  //   if (temp == Prefs.All ||
+  //       temp == Prefs.MathAndHebrew ||
+  //       temp == Prefs.MatnAndEnglish ||
+  //       temp == Prefs.OnlyMath) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
-  static bool checkhebrew(Prefs temp) {
-    if (temp == Prefs.All ||
-        temp == Prefs.EnglishAndHebrew ||
-        temp == Prefs.MathAndHebrew ||
-        temp == Prefs.OnlyHebrew) {
-      return true;
-    }
-    return false;
-  }
+  // static bool checkhebrew(Prefs temp) {
+  //   if (temp == Prefs.All ||
+  //       temp == Prefs.EnglishAndHebrew ||
+  //       temp == Prefs.MathAndHebrew ||
+  //       temp == Prefs.OnlyHebrew) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
-  static bool checkenglish(Prefs temp) {
-    if (temp == Prefs.All ||
-        temp == Prefs.EnglishAndHebrew ||
-        temp == Prefs.MatnAndEnglish ||
-        temp == Prefs.OnlyEnglish) {
-      return true;
-    }
-    return false;
-  }
+  // static bool checkenglish(Prefs temp) {
+  //   if (temp == Prefs.All ||
+  //       temp == Prefs.EnglishAndHebrew ||
+  //       temp == Prefs.MatnAndEnglish ||
+  //       temp == Prefs.OnlyEnglish) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   @override
   Widget build(BuildContext context) {

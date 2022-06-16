@@ -15,6 +15,10 @@ class AppUser with ChangeNotifier {
   int lostpoint = 0;
   final _auth = FirebaseAuth.instance;
 
+  //  טענת כניסה - 2 משתנים מסוג מחרוזת , משתנה בוליאני ומשתנה מסוג buildContext
+  // טענת יציאה - אין
+  // מטרת הפעולה - הרשמה של משתמשים לאפליקציה
+
   void sumbitAuthForm(
     String email,
     String password,
@@ -96,6 +100,11 @@ class AppUser with ChangeNotifier {
   // }
 //---
 
+////////
+  //  נכון ל6 הפעולות הבאות
+  // טענת כניסה - אין
+  // טענת יציאה - משתנה מסוג מחרוזת או מספר שלם
+  // מטרת הפעולה - החזרת פיסת מידע על המשתמש
   String? get getNickName {
     return nickname;
   }
@@ -120,11 +129,22 @@ class AppUser with ChangeNotifier {
     return englishpoint;
   }
 
+////////
+
+  // טענת כניסה - משתנה מסוג מחרוזת
+  // טענת יציאה - אין
+  // מטרת הפעולה - עדכון המחרוזת המזהה של המשתמש
   void setUid(String userId) {
     uid = userId;
     notifyListeners();
   }
+/////
 
+// עבור 6 הפעולות הבאות
+
+  // טענת כניסה - משתנה מסוג מחרוזת או מספר שלם
+  // טענת יציאה - אין
+  // מטרת הפעולה - לעדכן במסד הנתונים את המידע אשר התקבל
   void setUserName(String username) {
     FirebaseFirestore.instance
         .collection('users')
@@ -177,9 +197,6 @@ class AppUser with ChangeNotifier {
     this.lostpoint = d;
     notifyListeners();
   }
+/////
 
-  // void setUserName(String name) {
-  //   username = name;
-  //   notifyListeners();
-  // }
 }

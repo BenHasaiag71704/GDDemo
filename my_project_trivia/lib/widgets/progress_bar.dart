@@ -24,6 +24,9 @@ class _ProgressBarState extends State<ProgressBar> {
   int _start = 0;
   bool didcg = false;
 
+  // טענת כניסה - משתנה מסוג מספר שלם
+  // טענת יציאה - אין
+  // מטרת הפעולה - פעולה המתחילה את שעון החול
   void startTimer(int totalsc) {
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
@@ -40,6 +43,9 @@ class _ProgressBarState extends State<ProgressBar> {
     );
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה -פעולה המנקה את שעון החול במטרה שלא יווצר מצב שהוא ממשיך לרוץ מאחורי הקלעים גם אם אנו לא במסך המשחק
   @override
   void dispose() {
     _timer.cancel();

@@ -11,6 +11,9 @@ class _NewMessageState extends State<NewMessage> {
   var _enteredMessage = '';
   final _controller = new TextEditingController();
 
+  // טענת כניסה - אין
+  // טענת יציאה - אין
+  // מטרת הפעולה - פעולה המכניסה את ההודעה שנשלחה למסד הנתונים
   void _sendMessage() {
     FocusScope.of(context).unfocus();
     final user = FirebaseAuth.instance.currentUser;

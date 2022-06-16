@@ -28,6 +28,9 @@ class _OptionState extends State<Option> {
   int? selectedOption;
   bool b = false;
 
+  // טענת כניסה - אין
+  // טענת יציאה - משתנה מסוג צבע
+  // מטרת הפעולה - פעולה שמטרתה למצוא את הצבע שאמור להיות לשאלה אחרי שהמשתמש ענה (ירוק אם ענה נכון , אדום אם טעות , ובכל מקרה אחר תשאיר אפור)
   Color getTheRightColor() {
     if (selectedOption != null) {
       if (Provider.of<Questions>(context).getCurrentQuestion().answer ==
@@ -45,6 +48,9 @@ class _OptionState extends State<Option> {
     }
   }
 
+  // טענת כניסה - אין
+  // טענת יציאה - משתנה מסוג איקון
+  // מטרת הפעולה - פעולה המחזירה את האיקון בהתאם לצבע
   IconData getTheRightIcon() {
     return getTheRightColor() == Colors.red ? Icons.close : Icons.done;
   }
