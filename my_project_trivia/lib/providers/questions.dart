@@ -95,6 +95,9 @@ class Questions with ChangeNotifier {
     }
   }
 
+  // טענת כניסה - משתנה מסוג מחרוזת
+  // טענת יציאה - אין
+  // מטרת הפעולה - להחזיר את השאלות לתוך הרשימה הראשית לאחר הסינון
   void getBackQn(String str) {
     if (_questionList.isEmpty == false) {
       _finalQuestionList.forEach((element) {
@@ -117,64 +120,9 @@ class Questions with ChangeNotifier {
     print(_questionList.length);
   }
 
-  // // טענת כניסה - אין
-  // // טענת יציאה - אין
-  // // מטרת הפעולה - להחזיר את שאלות האנגלית לרשימה הראשית עליה אנו עובדים
-  // void getBackEnglish() {
-  //   if (_questionList.isEmpty == false) {
-  //     _finalQuestionList.forEach((element) {
-  //       if (element.type == "english") {
-  //         _questionList.add(element);
-  //       }
-  //     });
-  //   } else {
-  //     _questionList = _onlyEnglishList;
-  //   }
-
-  //   notifyListeners();
-  //   print(_questionList.length);
-  // }
-
-  // // טענת כניסה - אין
-  // // טענת יציאה - אין
-  // // מטרת הפעולה - להחזיר את שאלות העברית לרשימה הראשית עליה אנו עובדים
-  // void getBackHebrew() {
-  //   if (_questionList.isEmpty == false) {
-  //     _finalQuestionList.forEach((element) {
-  //       if (element.type == "hebrew") {
-  //         _questionList.add(element);
-  //       }
-  //     });
-  //   } else {
-  //     _questionList = _onlyHberewList;
-  //   }
-
-  //   notifyListeners();
-  //   print(_questionList.length);
-  // }
-
-  // // טענת כניסה - אין
-  // // טענת יציאה - אין
-  // // מטרת הפעולה - להחזיר את שאלות מתמטיקה לרשימה הראשית עליה אנו עובדים
-  // void getBackMath() {
-  //   if (_questionList.isEmpty == false) {
-  //     _finalQuestionList.forEach((element) {
-  //       if (element.type == "math") {
-  //         _questionList.add(element);
-  //       }
-  //     });
-  //   } else {
-  //     _questionList = _onlyMathList;
-  //   }
-
-  //   notifyListeners();
-  //   print(_questionList.length);
-  // }
-
-  // טענת כניסה - אין
+  // טענת כניסה - משתנה מסוג מחרוזת
   // טענת יציאה - אין
-  // מטרת הפעולה - להוציא את שאלות המתמטיקה מהרשימה הראשית עליה אנו עובדים
-
+  // מטרת הפעולה - לנקות את השאלות מתוך הרשימה הראשית לאחר ביצוע סינון
   void cleanAllTypeQn(String str) {
     List<Question> temp = [];
     _questionList.forEach((element) {
@@ -186,48 +134,6 @@ class Questions with ChangeNotifier {
     notifyListeners();
     print(_questionList.length);
   }
-
-  // void cleanMath() {
-  //   List<Question> temp = [];
-  //   _questionList.forEach((element) {
-  //     if (element.type != "math") {
-  //       temp.add(element);
-  //     }
-  //   });
-  //   _questionList = temp;
-  //   notifyListeners();
-  //   print(_questionList.length);
-  // }
-
-  // // טענת כניסה - אין
-  // // טענת יציאה - אין
-  // // מטרת הפעולה - להוציא את שאלות העברית מהרשימה הראשית עליה אנו עובדים
-  // void cleanHebrew() {
-  //   List<Question> temp = [];
-  //   _questionList.forEach((element) {
-  //     if (element.type != "hebrew") {
-  //       temp.add(element);
-  //     }
-  //   });
-  //   _questionList = temp;
-  //   notifyListeners();
-  //   print(_questionList.length);
-  // }
-
-  // // טענת כניסה - אין
-  // // טענת יציאה - אין
-  // // מטרת הפעולה - להוציא את שאלות האנגלית מהרשימה הראשית עליה אנו עובדים
-  // void cleanEnglish() {
-  //   List<Question> temp = [];
-  //   _questionList.forEach((element) {
-  //     if (element.type != "english") {
-  //       temp.add(element);
-  //     }
-  //   });
-  //   _questionList = temp;
-  //   notifyListeners();
-  //   print(_questionList.length);
-  // }
 
   // טענת כניסה - אין
   // טענת יציאה - אין
